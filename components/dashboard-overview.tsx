@@ -9,7 +9,7 @@ import { DashboardHeader } from "@/components/dashboard-header";
 import { DashboardShell } from "@/components/dashboard-shell";
 
 export function DashboardOverview() {
-  const router = useRouter();  
+  const router = useRouter();
 
   return (
     <DashboardShell>
@@ -115,8 +115,13 @@ export function DashboardOverview() {
               </div>
             </CardContent>
           </Card>
-          {/* <Card> */}
-            {/* <CardHeader>
+          <AIInsights />
+        </div>
+
+        {/* <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3"> */}
+          
+          {/* <Card>
+            <CardHeader>
               <CardTitle>Quick Actions</CardTitle>
               <CardDescription>Common tasks and shortcuts</CardDescription>
             </CardHeader>
@@ -146,12 +151,7 @@ export function DashboardOverview() {
               </Button>
             </CardContent>
           </Card> */}
-            <DailySchedule />
-        </div>
-
-        {/* <div className="grid gap-4">
-          <DailySchedule />
-        </div> */}
+        {/* </div> */}
 
         <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
           <Card className="col-span-2">
@@ -181,7 +181,8 @@ export function DashboardOverview() {
               </div>
             </CardContent>
           </Card>
-          <Card>
+          <DailySchedule />
+          {/* <Card>
             <CardHeader>
               <CardTitle>System Status</CardTitle>
               <CardDescription>AI system performance</CardDescription>
@@ -203,7 +204,7 @@ export function DashboardOverview() {
                 ))}
               </div>
             </CardContent>
-          </Card>
+          </Card> */}
         </div>
       </div>
     </DashboardShell>
@@ -277,7 +278,7 @@ function DailySchedule() {
         </Button>
       </CardHeader>
       <CardContent>
-        <p className="text-sm text-gray-500 mb-4">Today - March 18, 2025</p>
+        <p className="text-sm text-gray-500 mb-4">Today - May 29, 2025</p>
         {appointments.map((appointment) => (
           <div
             key={appointment.id}
@@ -371,6 +372,52 @@ function DailySchedule() {
   );
 }
 
+function AIInsights() {
+  return (
+    <Card>
+      <CardHeader className="flex flex-row items-center justify-between">
+        <CardTitle>AI Insights</CardTitle>
+        {/* <CardDescription>System Performance</CardDescription> */}
+      </CardHeader>
+      <CardContent className="space-y-6">
+        <div>
+          <div className="flex items-center justify-between mb-2">
+            <div className="text-sm font-medium">AI Accuracy</div>
+            <div className="text-sm text-gray-500">Recommendation Accuracy</div>
+          </div>
+          <div className="w-full bg-gray-200 rounded-full h-2.5">
+            <div
+              className="bg-black h-2.5 rounded-full"
+              style={{ width: "95%" }}
+            ></div>
+          </div>
+          <div className="text-right text-sm font-medium mt-1">95%</div>
+        </div>
+        <div>
+          <div className="text-sm font-medium">Time Saved by AI</div>
+          <div className="flex justify-between text-sm text-gray-500 mt-1">
+            <span>This Week</span>
+            <span>This Month</span>
+          </div>
+          <div className="flex justify-between text-lg font-bold mt-1">
+            <span>240 minutes</span>
+            <span>990 minutes</span>
+          </div>
+        </div>
+        <div>
+          <div className="text-sm font-medium">AI Recommendations Impact:</div>
+          <ul className="list-disc list-inside text-sm text-gray-600 mt-2 space-y-1">
+            <li>+16% faster case processing</li>
+            <li>+12% higher approval accuracy</li>
+            <li>+8% reduction in documentation errors</li>
+            <li>+12% improvement in applicant satisfaction</li>
+          </ul>
+        </div>
+      </CardContent>
+    </Card>
+  );
+}
+
 const recentApplications = [
   {
     id: "UAE-2023-78945",
@@ -403,12 +450,12 @@ const recentApplications = [
 ];
 
 const processingStats = [
-  { label: "AI Auto-Approval Rate", value: 78, color: "#10B981" },
-  { label: "Manual Review Required", value: 22, color: "#F59E0B" },
-  { label: "Escalated Applications", value: 12, color: "#EF4444" },
-  { label: "Processing Time Reduction", value: 92, color: "#3B82F6" },
-  { label: "SLA Compliance", value: 95, color: "#8B5CF6" },
-  { label: "Client Satisfaction", value: 85, color: "#EC4899" },
+  { label: "AI Auto-Approval Rate", value: 78, color: "#000000" },
+  { label: "Manual Review Required", value: 22, color: "#000000" },
+  { label: "Escalated Applications", value: 12, color: "#000000" },
+  { label: "Processing Time Reduction", value: 92, color: "#000000" },
+  { label: "SLA Compliance", value: 95, color: "#000000" },
+  { label: "Client Satisfaction", value: 4.7/5, color: "#000000" },
 ];
 
 const systemStatus = [
