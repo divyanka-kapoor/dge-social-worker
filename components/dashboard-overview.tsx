@@ -1,15 +1,15 @@
-"use client"
+"use client";
 
-import { useRouter } from "next/navigation"
-import { ArrowDown, ArrowUp, Bell, FileSearch, Settings } from "lucide-react"
+import { useRouter } from "next/navigation";
+import { ArrowDown, ArrowUp, Bell, FileSearch, Settings } from "lucide-react";
 
-import { Button } from "@/components/ui/button"
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
-import { DashboardHeader } from "@/components/dashboard-header"
-import { DashboardShell } from "@/components/dashboard-shell"
+import { Button } from "@/components/ui/button";
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
+import { DashboardHeader } from "@/components/dashboard-header";
+import { DashboardShell } from "@/components/dashboard-shell";
 
 export function DashboardOverview() {
-  const router = useRouter()
+  const router = useRouter();  
 
   return (
     <DashboardShell>
@@ -105,7 +105,7 @@ export function DashboardOverview() {
                       <Button
                         variant="outline"
                         size="sm"
-                        onClick={() => router.push(/applications/${application.id})}
+                        onClick={() => router.push(`/applications/${application.id}`)}
                       >
                         View
                       </Button>
@@ -115,8 +115,8 @@ export function DashboardOverview() {
               </div>
             </CardContent>
           </Card>
-          <Card>
-            <CardHeader>
+          {/* <Card> */}
+            {/* <CardHeader>
               <CardTitle>Quick Actions</CardTitle>
               <CardDescription>Common tasks and shortcuts</CardDescription>
             </CardHeader>
@@ -132,7 +132,11 @@ export function DashboardOverview() {
                 <FileSearch className="mr-2 h-4 w-4" />
                 Generate Reports
               </Button>
-              <Button className="w-full justify-start" variant="outline" onClick={() => router.push("/search")}>
+              <Button
+                className="w-full justify-start"
+                variant="outline"
+                onClick={() => router.push("/search")}
+              >
                 <FileSearch className="mr-2 h-4 w-4" />
                 Applicant Search
               </Button>
@@ -141,8 +145,13 @@ export function DashboardOverview() {
                 System Settings
               </Button>
             </CardContent>
-          </Card>
+          </Card> */}
+            <DailySchedule />
         </div>
+
+        {/* <div className="grid gap-4">
+          <DailySchedule />
+        </div> */}
 
         <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
           <Card className="col-span-2">
@@ -162,7 +171,7 @@ export function DashboardOverview() {
                       <div
                         className="h-2 rounded-full"
                         style={{
-                          width: ${stat.value}%,
+                          width: `${stat.value}%`,
                           backgroundColor: stat.color,
                         }}
                       />
@@ -183,13 +192,12 @@ export function DashboardOverview() {
                   <div key={status.label} className="flex items-center justify-between">
                     <span className="text-sm">{status.label}</span>
                     <span
-                      className={flex h-2.5 w-2.5 rounded-full ${
-                        status.status === "operational"
+                      className={`flex h-2.5 w-2.5 rounded-full ${status.status === "operational"
                           ? "bg-green-500"
                           : status.status === "degraded"
                             ? "bg-amber-500"
                             : "bg-red-500"
-                      }}
+                        }`}
                     />
                   </div>
                 ))}
@@ -199,23 +207,168 @@ export function DashboardOverview() {
         </div>
       </div>
     </DashboardShell>
-  )
+  );
 }
 
 function StatusBadge({ status }: { status: string }) {
-  let bgColor = "bg-gray-100 text-gray-800"
+  let bgColor = "bg-gray-100 text-gray-800";
 
   if (status === "Pending") {
-    bgColor = "bg-amber-100 text-amber-800"
+    bgColor = "bg-amber-100 text-amber-800";
   } else if (status === "Approved") {
-    bgColor = "bg-green-100 text-green-800"
+    bgColor = "bg-green-100 text-green-800";
   } else if (status === "Pending - Urgent") {
-    bgColor = "bg-red-100 text-red-800"
+    bgColor = "bg-red-100 text-red-800";
   } else if (status === "Auto-Approved") {
-    bgColor = "bg-blue-100 text-blue-800"
+    bgColor = "bg-blue-100 text-blue-800";
   }
 
-  return <span className={rounded-full px-2 py-1 text-xs font-medium ${bgColor}}>{status}</span>
+  return (
+    <span className={`rounded-full px-2 py-1 text-xs font-medium ${bgColor}`}>
+      {status}
+    </span>
+  );
+}
+
+function DailySchedule() {
+  const appointments = [
+    {
+      id: "1",
+      type: "Home Visit",
+      name: "Aisha Al-Mansouri",
+      location: "Dubai, Al Barsha Area",
+      time: "10:00 AM - 11:00 AM",
+      caseId: "2847",
+      isCall: false,
+    },
+    {
+      id: "2",
+      type: "Phone Call",
+      name: `Case #${2847}`,
+      location: "",
+      time: "02:00 PM - 02:30 PM",
+      caseId: "2847",
+      isCall: true,
+    },
+  ];
+
+  return (
+    <Card>
+      <CardHeader className="flex flex-row items-center justify-between">
+        <div className="flex items-center gap-2">
+          <svg
+            className="h-5 w-5 text-gray-500"
+            fill="none"
+            stroke="currentColor"
+            viewBox="0 0 24 24"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              strokeWidth="2"
+              d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"
+            />
+          </svg>
+          <CardTitle>Daily Schedule</CardTitle>
+        </div>
+        <Button variant="outline" size="sm" onClick={() => alert("Add Appointment clicked")}>
+          + Add Appointment
+        </Button>
+      </CardHeader>
+      <CardContent>
+        <p className="text-sm text-gray-500 mb-4">Today - March 18, 2025</p>
+        {appointments.map((appointment) => (
+          <div
+            key={appointment.id}
+            className="mb-4 p-4 border rounded-lg shadow-sm bg-white"
+          >
+            <div className="flex items-center gap-2 mb-2">
+              {appointment.isCall ? (
+                <svg
+                  className="h-5 w-5 text-green-500"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth="2"
+                    d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"
+                  />
+                </svg>
+              ) : (
+                <svg
+                  className="h-5 w-5 text-gray-500"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth="2"
+                    d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"
+                  />
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth="2"
+                    d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"
+                  />
+                </svg>
+              )}
+              <div>
+                <div className="font-medium">{appointment.type}: {appointment.name}</div>
+                {appointment.location && (
+                  <div className="text-sm text-gray-500">{appointment.location}</div>
+                )}
+                <div className="text-sm text-gray-500">{appointment.time}</div>
+              </div>
+            </div>
+            <div className="flex gap-2">
+              <Button
+                variant="default"
+                size="sm"
+                className="bg-black text-white hover:bg-gray-800"
+                onClick={() => router.push(`/cases/${appointment.caseId}`)}
+              >
+                View Case
+              </Button>
+              {!appointment.isCall && (
+                <Button
+                  variant="outline"
+                  size="sm"
+                  onClick={() => alert("Directions clicked")}
+                >
+                  Directions
+                </Button>
+              )}
+              {appointment.isCall && (
+                <Button
+                  variant="outline"
+                  size="sm"
+                  onClick={() => alert("Join Call clicked")}
+                >
+                  Join Call
+                </Button>
+              )}
+              <Button
+                variant="outline"
+                size="sm"
+                onClick={() => alert("Reschedule clicked")}
+              >
+                Reschedule
+              </Button>
+            </div>
+          </div>
+        ))}
+      </CardContent>
+    </Card>
+  );
 }
 
 const recentApplications = [
@@ -247,16 +400,16 @@ const recentApplications = [
     type: "Education Support",
     status: "Approved",
   },
-]
+];
 
 const processingStats = [
-  { label: "AI Auto-Approval Rate", value: 78, color: "#000000" },
-  { label: "Manual Review Required", value: 22, color: "#000000" },
-  { label: "Escalated Applications", value: 12, color: "#000000" },
-  { label: "Processing Time Reduction", value: 92, color: "#000000" },
-  { label: "SLA Compliance", value: 95, color: "#000000" },  
-  { label: "Client Satisfaction", value: 85, color: "#000000" },
-]
+  { label: "AI Auto-Approval Rate", value: 78, color: "#10B981" },
+  { label: "Manual Review Required", value: 22, color: "#F59E0B" },
+  { label: "Escalated Applications", value: 12, color: "#EF4444" },
+  { label: "Processing Time Reduction", value: 92, color: "#3B82F6" },
+  { label: "SLA Compliance", value: 95, color: "#8B5CF6" },
+  { label: "Client Satisfaction", value: 85, color: "#EC4899" },
+];
 
 const systemStatus = [
   { label: "Document Verification AI", status: "operational" },
@@ -264,5 +417,4 @@ const systemStatus = [
   { label: "Cross-Reference System", status: "degraded" },
   { label: "Fraud Detection", status: "operational" },
   { label: "Notification System", status: "operational" },
-]
-}
+];
