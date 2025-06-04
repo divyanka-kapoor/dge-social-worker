@@ -44,7 +44,7 @@ export function DashboardHeader() {
                 <span>Social Support System</span>
               </Link>
               <Link href="/" className="hover:text-primary">
-                Dashboard
+                Home
               </Link>
               <Link href="/applications" className="hover:text-primary">
                 Applications
@@ -69,7 +69,7 @@ export function DashboardHeader() {
             alt="UAE Government Logo"
             className="rounded"
           />
-          <span className="text-lg font-semibold">Social Support Management System</span>
+          <span className="text-lg font-semibold">UAE Social Support</span>
         </Link>
         <MainNav className="hidden md:flex" />
       </div>
