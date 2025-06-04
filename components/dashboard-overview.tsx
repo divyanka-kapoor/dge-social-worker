@@ -455,7 +455,7 @@ const processingStats = [
   { label: "Escalated Applications", value: 12, color: "#000000" },
   { label: "Processing Time Reduction", value: 92, color: "#000000" },
   { label: "SLA Compliance", value: 95, color: "#000000" },
-  { label: "Client Satisfaction", value: 4.7/5, color: "#000000" },
+  { label: "Client Satisfaction", value: 85, color: "#000000" },
 ];
 
 const systemStatus = [
