@@ -37,7 +37,7 @@ export function MainNav({ className }: { className?: string }) {
           pathname === "/search" ? "text-primary" : "text-muted-foreground",
         )}
       >
-        Search
+        Database
       </Link>
       {/* <Link
         href="/reports"
