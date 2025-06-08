@@ -21,7 +21,7 @@ export function ApplicationDetails({ id }: { id: string }) {
             </Button>
             <h1 className="text-2xl font-bold">Application Details</h1>
             <div className="ml-2 rounded-full bg-amber-100 px-2.5 py-0.5 text-xs font-medium text-amber-800">
-              Flagged
+              Pending - Urgent
             </div>
           </div>
           <div className="flex gap-2">
@@ -43,16 +43,16 @@ export function ApplicationDetails({ id }: { id: string }) {
               <div className="flex flex-col md:flex-row gap-6">
                 <div className="flex-shrink-0">
                   <Image
-                    src="/placeholder.svg?height=120&width=120"
-                    width={120}
-                    height={120}
+                    src="/aisha.png?height=170&width=170"
+                    width={170}
+                    height={170}
                     alt="Applicant Photo"
                     className="rounded-lg border"
                   />
                 </div>
                 <div className="flex-1">
-                  <h2 className="text-2xl font-bold">Mohammed Abdullah Al-Mansoori</h2>
-                  <h3 className="text-lg text-muted-foreground mb-4">محمد عبدالله المنصوري</h3>
+                  <h2 className="text-2xl font-bold">Aisha Al-Mansouri</h2>
+                  <h3 className="text-lg text-muted-foreground mb-4"> عائشة المنصوري </h3>
 
                   <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
                     <div>
@@ -87,161 +87,51 @@ export function ApplicationDetails({ id }: { id: string }) {
         </div>
 
         <Tabs defaultValue="personal">
-          <TabsList className="grid grid-cols-4 mb-6">
-            <TabsTrigger value="personal">Personal Information</TabsTrigger>
+          <TabsList className="grid grid-cols-4 mb-6">            
             <TabsTrigger value="ai-analysis">AI Analysis</TabsTrigger>
+            <TabsTrigger value="personal">Personal Information</TabsTrigger>
             <TabsTrigger value="documents">Documents</TabsTrigger>
             <TabsTrigger value="history">History</TabsTrigger>
           </TabsList>
-
-          <TabsContent value="personal">
-            <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
-              <Card className="lg:col-span-2">
-                <CardContent className="p-6">
-                  <h3 className="text-lg font-medium mb-4">Family Tree</h3>
-                  <div className="aspect-video bg-slate-100 rounded-lg flex items-center justify-center">
-                    <span className="text-muted-foreground">Family Tree Visualization</span>
-                  </div>
-
-                  <h3 className="text-lg font-medium mt-6 mb-4">Family Members</h3>
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                    <PersonCard
-                      name="Mohammed Al-Mansoori"
-                      relation="Self"
-                      age={38}
-                      occupation="Unemployed"
-                      emiratesId="784-1985-1234567-8"
-                    />
-                    <PersonCard
-                      name="Maryam Al-Mansoori"
-                      relation="Spouse"
-                      age={35}
-                      occupation="Homemaker"
-                      emiratesId="784-1988-7654321-0"
-                    />
-                    <PersonCard
-                      name="Hamad Al-Mansoori"
-                      relation="Son"
-                      age={12}
-                      occupation="Student"
-                      emiratesId="784-2011-9876543-2"
-                    />
-                    <PersonCard
-                      name="Fatima Al-Mansoori"
-                      relation="Daughter"
-                      age={10}
-                      occupation="Student"
-                      emiratesId="784-2013-5432109-8"
-                    />
-                    <PersonCard
-                      name="Khalid Al-Mansoori"
-                      relation="Son"
-                      age={6}
-                      occupation="Student"
-                      emiratesId="784-2017-1357924-6"
-                    />
-                  </div>
-                </CardContent>
-              </Card>
-
-              <div className="space-y-6">
-                <Card>
-                  <CardContent className="p-6">
-                    <h3 className="text-lg font-medium mb-4">Income Sources</h3>
-                    <div className="space-y-4">
-                      <div className="flex justify-between items-center">
-                        <div>
-                          <div className="font-medium">Previous Employment</div>
-                          <div className="text-sm text-muted-foreground">Monthly</div>
-                        </div>
-                        <div className="text-right">
-                          <div className="font-medium">AED 4,500</div>
-                          <div className="text-xs text-green-600">Verified</div>
-                        </div>
-                      </div>
-                      <div className="flex justify-between items-center">
-                        <div>
-                          <div className="font-medium">Family Support</div>
-                          <div className="text-sm text-muted-foreground">Monthly</div>
-                        </div>
-                        <div className="text-right">
-                          <div className="font-medium">AED 2,000</div>
-                          <div className="text-xs text-amber-600">Pending Verification</div>
-                        </div>
-                      </div>
-                      <div className="pt-2 border-t">
-                        <div className="flex justify-between items-center">
-                          <div className="font-medium">Total Monthly Income</div>
-                          <div className="font-medium">AED 6,500</div>
-                        </div>
-                      </div>
-                    </div>
-                  </CardContent>
-                </Card>
-
-                <Card>
-                  <CardContent className="p-6">
-                    <h3 className="text-lg font-medium mb-4">Assets Summary</h3>
-                    <div className="space-y-3">
-                      <div className="flex justify-between">
-                        <span className="text-sm">Bank Accounts</span>
-                        <span className="font-medium">AED 12,500</span>
-                      </div>
-                      <div className="flex justify-between">
-                        <span className="text-sm">Vehicles</span>
-                        <span className="font-medium">1 (2015 Toyota)</span>
-                      </div>
-                      <div className="flex justify-between">
-                        <span className="text-sm">Properties</span>
-                        <span className="font-medium">None</span>
-                      </div>
-                      <div className="flex justify-between">
-                        <span className="text-sm">Investments</span>
-                        <span className="font-medium">None</span>
-                      </div>
-                    </div>
-                  </CardContent>
-                </Card>
-
-                <Card>
-                  <CardContent className="p-6">
-                    <h3 className="text-lg font-bold mb-4">Housing Situation</h3>
-                    <div className="space-y-3">
-                      <div className="flex justify-between">
-                        <span className="text-sm">Housing Type</span>
-                        <span className="font-medium">Rented Apartment</span>
-                      </div>
-                      <div className="flex justify-between">
-                        <span className="text-sm">Monthly Rent</span>
-                        <span className="font-medium">AED 5,500</span>
-                      </div>
-                      <div className="flex justify-between">
-                        <span className="text-sm">Location</span>
-                        <span className="font-medium">Al Nahda, Sharjah</span>
-                      </div>
-                      <div className="flex justify-between">
-                        <span className="text-sm">Contract Expiry</span>
-                        <span className="font-medium">March 15, 2024</span>
-                      </div>
-                    </div>
-                  </CardContent>
-                </Card>
-              </div>
-            </div>
-          </TabsContent>
 
           <TabsContent value="ai-analysis">
             <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
               <Card className="lg:col-span-2">
                 <CardContent className="p-6">
-                  <h3 className="text-lg font-medium mb-4">Eligibility Assessment</h3>
+                  <h3 className="text-lg font-bold mt-8 mb-4">AI Recommendation</h3>
+                  <div className="p-4 border rounded-md">
+                    <p className="text-sm">
+                      Aisha was divorced on May 20, 2025. 
+                      <br />
+                      <br />
+                      She meets most eligibility criteria for financial-aid assistance. Her family's income is
+                      significantly below the threshold, and the medical necessity is well-documented. The family size
+                      and composition also qualify for additional support.
+                    </p>
+                    <p className="text-sm mt-3">However, <b><span className="text-red-600">manual review is recommended</span></b> due to two factors:</p>
+                    <ol className="list-disc list-inside text-sm mt-2 space-y-1">
+                      <li>Housing verification for the "Family Support" source requires additional documentation</li>
+                      <li>
+                        Previous financial aid was received within the past 12 months, requiring assessment of ongoing
+                        need.
+                      </li>
+                    </ol>
+                    <p className="text-sm mt-3">
+                      The AI system recommends approval with verification of the housing documentation.
+                    </p>
+                  </div>
+                  
+
+                  <div className="border rounded-md p-3 space-y-6">
+                    <div className="space-y-2"></div>
+                  <h3 className="text-lg font-bold mb-4">Eligibility Assessment</h3>
                   <div className="space-y-6">
                     <div className="space-y-2">
                       <div className="flex justify-between">
                         <span className="font-medium">Income Threshold</span>
                         <span className="text-green-600 font-medium">Eligible</span>
                       </div>
-                      <Progress value={35} className="h-2" />
+                        <Progress value={35} className="h-2 bg-white-100"/>
                       <div className="text-sm text-muted-foreground">
                         Family income (AED 6,500) is below the threshold (AED 10,000) for healthcare assistance
                       </div>
@@ -272,9 +162,9 @@ export function ApplicationDetails({ id }: { id: string }) {
                     <div className="space-y-2">
                       <div className="flex justify-between">
                         <span className="font-medium">Previous Support</span>
-                        <span className="text-amber-600 font-medium">Review Needed</span>
+                        <span className="text-red-600 font-medium">Review Needed</span>
                       </div>
-                      <Progress value={65} className="h-2 bg-amber-100" />
+                      <Progress value={65} className="h-2 bg-pink-100"/>
                       <div className="text-sm text-muted-foreground">
                         Received financial aid 8 months ago (AED 15,000)
                       </div>
@@ -291,29 +181,10 @@ export function ApplicationDetails({ id }: { id: string }) {
                       </div>
                     </div>
                   </div>
-
-                  <h3 className="text-lg font-medium mt-8 mb-4">Recommendation Explanation</h3>
-                  <div className="p-4 border rounded-md">
-                    <p className="text-sm">
-                      The applicant meets most eligibility criteria for healthcare assistance. The family's income is
-                      significantly below the threshold, and the medical necessity is well-documented. The family size
-                      and composition also qualify for additional support.
-                    </p>
-                    <p className="text-sm mt-3">However, manual review is recommended due to two factors:</p>
-                    <ul className="list-disc list-inside text-sm mt-2 space-y-1">
-                      <li>Income verification for the "Family Support" source requires additional documentation</li>
-                      <li>
-                        Previous financial aid was received within the past 12 months, requiring assessment of ongoing
-                        need
-                      </li>
-                    </ul>
-                    <p className="text-sm mt-3">
-                      The AI system recommends approval with verification of the family support income source.
-                    </p>
                   </div>
                 </CardContent>
               </Card>
-
+            
               <div className="space-y-6">
                 <Card>
                   <CardContent className="p-6">
@@ -345,7 +216,7 @@ export function ApplicationDetails({ id }: { id: string }) {
                           </div>
                         </div>
                         <div className="border rounded-md p-3">
-                          <div className="text-sm font-medium">Income Verification</div>
+                          <div className="text-sm font-medium">Housing Verification</div>
                           <div className="mt-1 flex items-center">
                             <div className="h-2 w-2 rounded-full bg-amber-500 mr-2"></div>
                             <span className="text-sm">Medium Risk</span>
@@ -402,6 +273,128 @@ export function ApplicationDetails({ id }: { id: string }) {
                       <Progress value={76} className="h-2" />
                       <div className="text-xs text-muted-foreground">
                         Medium confidence due to income verification issues
+                      </div>
+                    </div>
+                  </CardContent>
+                </Card>
+              </div>
+            </div>
+          </TabsContent>
+
+          <TabsContent value="personal">
+            <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
+              <Card className="lg:col-span-2">
+                <CardContent className="p-6">
+                  <h3 className="text-lg font-medium mb-4">Family Tree</h3>
+                  <div className="aspect-video bg-slate-100 rounded-lg flex items-center justify-center">
+                    <span className="text-muted-foreground">Family Tree Visualization</span>
+                  </div>
+
+                  <h3 className="text-lg font-medium mt-6 mb-4">Family Members</h3>
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <PersonCard
+                      name="Aisha Al-Mansouri"
+                      relation="Self"
+                      age={32}
+                      occupation="Unemployed"
+                      emiratesId="784-1985-1234567-8"
+                    />
+                    <PersonCard
+                      name="Hamad Al-Mansoori"
+                      relation="Son"
+                      age={3}
+                      occupation="Student"
+                      emiratesId="784-2011-9876543-2"
+                    />
+                    <PersonCard
+                      name="Fatima Al-Mansoori"
+                      relation="Daughter"
+                      age={7}
+                      occupation="Student"
+                      emiratesId="784-2013-5432109-8"
+                    />
+                  </div>
+                </CardContent>
+              </Card>
+
+              <div className="space-y-6">
+                <Card>
+                  <CardContent className="p-6">
+                    <h3 className="text-lg font-bold mb-4">Income Sources</h3>
+                    <div className="space-y-4">
+                      <div className="flex justify-between items-center">
+                        <div>
+                          <div className="font-medium">Previous Employment</div>
+                          <div className="text-sm text-muted-foreground">Monthly</div>
+                        </div>
+                        <div className="text-right">
+                          <div className="font-medium">AED 4,500</div>
+                          <div className="text-xs text-green-600">Verified</div>
+                        </div>
+                      </div>
+                      <div className="flex justify-between items-center">
+                        <div>
+                          <div className="font-medium">Family Support</div>
+                          <div className="text-sm text-muted-foreground">Monthly</div>
+                        </div>
+                        <div className="text-right">
+                          <div className="font-medium">AED 2,000</div>
+                          <div className="text-xs text-amber-600">Pending Verification</div>
+                        </div>
+                      </div>
+                      <div className="pt-2 border-t">
+                        <div className="flex justify-between items-center">
+                          <div className="font-bold">Total Monthly Income</div>
+                          <div className="font-bold">AED 6,500</div>
+                        </div>
+                      </div>
+                    </div>
+                  </CardContent>
+                </Card>
+
+                <Card>
+                  <CardContent className="p-6">
+                    <h3 className="text-lg font-bold mb-4">Assets Summary</h3>
+                    <div className="space-y-3">
+                      <div className="flex justify-between">
+                        <span className="text-sm">Bank Accounts</span>
+                        <span className="font-medium">AED 12,500</span>
+                      </div>
+                      <div className="flex justify-between">
+                        <span className="text-sm">Vehicles</span>
+                        <span className="font-medium">1 (2015 Toyota)</span>
+                      </div>
+                      <div className="flex justify-between">
+                        <span className="text-sm">Properties</span>
+                        <span className="font-medium">None</span>
+                      </div>
+                      <div className="flex justify-between">
+                        <span className="text-sm">Investments</span>
+                        <span className="font-medium">None</span>
+                      </div>
+                    </div>
+                  </CardContent>
+                </Card>
+
+                <Card>
+                  <CardContent className="p-6">
+                    <h3 className="text-lg font-bold mb-4">Housing Situation</h3>
+                    <div className="space-y-3">
+                      <div className="flex justify-between">
+                        <span className="text-sm">Housing Type</span>
+                        <span className="font-medium">Rented Apartment</span>
+                      </div>
+                      <div className="flex justify-between">
+                        <span className="text-sm">Monthly Rent</span>
+                        <span className="font-medium">AED 5,500</span>
+                      </div>
+                      <div className="flex justify-between">
+                        <span className="text-sm">Location</span>
+                        <span className="font-medium">Al Nahda, Sharjah</span>
+                      </div>
+                      <div className="flex justify-between">
+                        <span className="text-sm">Contract Expiry</span>
+                        <span className="font-medium">March 15, 2024</span>
                       </div>
                     </div>
                   </CardContent>
@@ -748,3 +741,4 @@ function TimelineItem({
     </div>
   )
 }
+

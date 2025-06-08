@@ -589,7 +589,7 @@ export function ApplicationReview() {
       <DashboardHeader />
       <div className="flex flex-1 overflow-hidden">
         {/* Left Sidebar - Application List */}
-        {/* <div
+        <div
           className={`border-r transition-all duration-300 ${sidebarCollapsed ? "w-16" : "w-full md:w-80 lg:w-96"}`}
         >
           <div className="flex flex-col h-full">
@@ -728,123 +728,6 @@ export function ApplicationReview() {
                           .substring(0, 2)}
                       </div>
                       <StatusBadge status={application.status} />
-                    </div>
-                  ) : (
-                    <>
-                      <div className="flex justify-between items-start">
-                        <div>
-                          <div className="font-medium">{application.name}</div>
-                          <div className="text-xs text-muted-foreground">{application.arabicName}</div>
-                        </div>
-                        <StatusBadge status={application.status} />
-                      </div>
-                      <div className="mt-2 flex justify-between items-center">
-                        <div className="text-xs text-muted-foreground">
-                          ID: {application.id} • {application.type}
-                        </div>
-                        <div className="text-xs font-medium">AI: {application.aiConfidence}%</div>
-                      </div>
-                      <div className="mt-1 text-xs text-muted-foreground">Submitted: {application.timestamp}</div>
-                    </>
-                  )}
-                </div>
-              ))}
-            </div>
-          </div>
-        </div> */}
-        <div
-          className={`border-r transition-all duration-300 ${sidebarCollapsed ? "w-12" : "w-80"}`}
-          role="region"
-          aria-label="Application Sidebar"
-        >
-          <div className="flex flex-col h-full">
-            <div className="p-2 border-b flex items-center justify-between">
-              <Button
-                variant="ghost"
-                size="icon"
-                onClick={() => setSidebarCollapsed(!sidebarCollapsed)}
-                className="h-8 w-8"
-                aria-label={sidebarCollapsed ? "Expand sidebar" : "Collapse sidebar"}
-              >
-                {sidebarCollapsed ? <ChevronRight className="h-4 w-4" /> : <ChevronLeft className="h-4 w-4" />}
-              </Button>
-              {!sidebarCollapsed && <h2 className="text-sm font-medium">Applications</h2>}
-            </div>
-
-            {!sidebarCollapsed && (
-              <div className="p-4">
-                <div className="relative mb-4">
-                  <Search className="absolute left-2.5 top-2.5 h-4 w-4 text-muted-foreground" />
-                  <Input
-                    type="search"
-                    placeholder="Search applications..."
-                    className="pl-8"
-                    aria-label="Search applications"
-                  />
-                </div>
-                <div className="flex items-center justify-between">
-                  <h2 className="text-sm font-medium">Filters</h2>
-                  <Popover>
-                    <PopoverTrigger asChild>
-                      <Button variant="outline" size="sm" className="h-8 gap-1" aria-label="Open filter options">
-                        <SlidersHorizontal className="h-3.5 w-3.5" />
-                        <span>Filter</span>
-                      </Button>
-                    </PopoverTrigger>
-                    <PopoverContent className="w-72">
-                      {/* Existing filter content */}
-                    </PopoverContent>
-                  </Popover>
-                </div>
-                <div className="grid grid-cols-2 gap-2 mt-3">
-                  <Select defaultValue="all">
-                    <SelectTrigger className="h-8" aria-label="Filter by status">
-                      <SelectValue placeholder="Status" />
-                    </SelectTrigger>
-                    <SelectContent>
-                      <SelectItem value="all">All Statuses</SelectItem>
-                      <SelectItem value="pending">Pending</SelectItem>
-                      <SelectItem value="flagged">Flagged</SelectItem>
-                      <SelectItem value="approved">Approved</SelectItem>
-                      <SelectItem value="rejected">Rejected</SelectItem>
-                    </SelectContent>
-                  </Select>
-                  <Select defaultValue="all">
-                    <SelectTrigger className="h-8" aria-label="Filter by type">
-                      <SelectValue placeholder="Type" />
-                    </SelectTrigger>
-                    <SelectContent>
-                      <SelectItem value="all">All Types</SelectItem>
-                      <SelectItem value="financial">Financial Aid</SelectItem>
-                      <SelectItem value="housing">Housing Support</SelectItem>
-                      <SelectItem value="healthcare">Healthcare</SelectItem>
-                      <SelectItem value="education">Education</SelectItem>
-                    </SelectContent>
-                  </Select>
-                </div>
-              </div>
-            )}
-            <div className="flex-1 overflow-auto">
-              {applications.map((application) => (
-                <div
-                  key={application.id}
-                  className={`border-b p-2 cursor-pointer hover:bg-slate-50 ${selectedApplication === application.id ? "bg-blue-50" : ""
-                    }`}
-                  onClick={() => setSelectedApplication(application.id)}
-                  role="button"
-                  tabIndex={0}
-                  onKeyDown={(e) => e.key === "Enter" && setSelectedApplication(application.id)}
-                  aria-label={`Select application for ${application.name}`}
-                >
-                  {sidebarCollapsed ? (
-                    <div className="flex flex-col items-center">
-                      <div className="w-8 h-8 rounded-full bg-blue-100 flex items-center justify-center text-xs font-medium">
-                        {application.name
-                          .split(" ")
-                          .map((n) => n[0])
-                          .join("")
-                          .substring(0, 2)}
-                      </div>
                     </div>
                   ) : (
                     <>
