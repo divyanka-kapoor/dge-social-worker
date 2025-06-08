@@ -581,7 +581,6 @@ function getApplicationData(applicationId: string): ApplicationData {
 export function ApplicationReview() {
   const router = useRouter();
   const [selectedApplication, setSelectedApplication] = useState<string | null>("UAE-2023-78948");
-  console.log(selectedApplication);
   const [sidebarCollapsed, setSidebarCollapsed] = useState(false);
 
   return (
@@ -1284,3 +1283,4 @@ const applications = [
     timestamp: "May 23, 2023",
   },
 ];
+

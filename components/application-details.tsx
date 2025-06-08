@@ -931,7 +931,7 @@ export function ApplicationDetails({ id }: { id: string }) {
   return (
     <DashboardShell>
       {/* Consolidated Dashboard Header */}
-      <DashboardHeader heading="Application Details">
+      <DashboardHeader />
         <div className="flex items-center gap-2">
           {/* Status Badge */}
           <div className="rounded-full bg-amber-100 px-2.5 py-0.5 text-xs font-medium text-amber-800">
@@ -950,14 +950,17 @@ export function ApplicationDetails({ id }: { id: string }) {
             Export
           </Button>
         </div>
-      </DashboardHeader>
 
       <div className="container mx-auto p-6 pt-0"> {/* Added pt-0 to prevent double padding with DashboardHeader */}
 
         {/* Applicant Details & Decision Cards - Two Columns */}
         <div className="grid grid-cols-1 md:grid-cols-[70%_30%] gap-6 mb-6">
           {/* Applicant Details Card - Occupies 70% width on medium screens and up */}
-          <Card className="md:col-span-1">
+          
+          {/* old view of the top section of the card */}
+
+
+   {/* <Card className="md:col-span-1"> 
             <CardContent className="p-6">
               <div className="flex flex-col md:flex-row gap-6">
                 <div className="flex-shrink-0">
@@ -970,8 +973,8 @@ export function ApplicationDetails({ id }: { id: string }) {
                   />
                 </div>
                 <div className="flex-1">
-                  <h2 className="text-2xl font-bold mb-1">Aisha Al-Mansouri</h2> {/* Consistent h2 */}
-                  <h3 className="text-lg text-muted-foreground mb-4"> عائشة المنصوري </h3> {/* Consistent h3 */}
+                  <h2 className="text-2xl font-bold mb-1">Aisha Al-Mansouri</h2> 
+                  <h3 className="text-lg text-muted-foreground mb-4"> عائشة المنصوري </h3> 
 
                   <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
                     <div>
@@ -984,7 +987,7 @@ export function ApplicationDetails({ id }: { id: string }) {
                     </div>
                     <div>
                       <div className="text-sm text-muted-foreground">Application Type</div>
-                      <div className="font-medium">Healthcare Assistance</div>
+                      <div className="font-medium">Financial Assistance</div>
                     </div>
                     <div>
                       <div className="text-sm text-muted-foreground">Submission Date</div>
@@ -993,9 +996,8 @@ export function ApplicationDetails({ id }: { id: string }) {
                     <div>
                       <div className="text-sm text-muted-foreground">Contact</div>
                       <div className="font-medium">+971 50 123 4567</div>
-                    </div>
-                    {/* Moved AI Confidence from AI Analysis tab here */}
-                    <div className="col-span-1 md:col-span-3"> {/* Span across all columns for better layout */}
+                    </div>                  
+                    <div className="col-span-1 md:col-span-3">
                       <div className="text-sm text-muted-foreground">AI Confidence</div>
                       <div className="space-y-2">
                         <div className="flex justify-between">
@@ -1006,6 +1008,70 @@ export function ApplicationDetails({ id }: { id: string }) {
                         <div className="text-xs text-muted-foreground">
                           Medium confidence due to income verification issues
                         </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </CardContent>
+          </Card> */} 
+          <Card className="md:col-span-1">
+            <CardContent className="p-6">
+              <div className="flex flex-col md:flex-row items-start md:items-center gap-6"> {/* items-start for top alignment on small, items-center for better alignment on large */}
+                <div className="flex-shrink-0 relative"> {/* Added relative for potential future badges on image */}
+                  <Image
+                    src="/aisha.png?height=170&width=170" // Ensure this path is correct
+                    width={120} // Slightly reduced image size for better balance on smaller cards
+                    height={120} // Adjusted height to match width
+                    alt="Applicant Photo"
+                    className="rounded-full border-2 border-gray-200 object-cover w-32 h-32" // Rounded photo, subtle border, fixed size
+                  />
+                </div>
+                <div className="flex-1 min-w-0"> {/* min-w-0 to prevent overflow in flex container */}
+                  <h2 className="text-3xl font-extrabold text-gray-900 mb-0.5">Aisha Al-Mansouri</h2> {/* Larger, bolder name */}
+                  <h3 className="text-lg text-gray-600 font-medium mb-4"> عائشة المنصوري </h3> {/* Slightly darker muted-foreground */}
+                  <div className="flex items-center text-sm text-gray-600">
+                    <span className="inline-block h-2 w-2 rounded-full bg-amber-500 mr-2"></span> {/* Status indicator dot */}
+                    <span className="font-medium">Application Status: Pending - Urgent</span>
+                  </div>
+                </div>
+              </div>
+
+              {/* Section for application details, separated visually */}
+              <div className="mt-6 border-t border-gray-200 pt-6"> {/* Separator line for better hierarchy */}
+                <h3 className="text-xl font-bold text-gray-800 mb-4">Application Overview</h3> {/* Sub-heading for this section */}
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-y-4 gap-x-6"> {/* Adjusted grid layout for better spacing */}
+                  <div className="pb-2 border-b border-gray-100"> {/* Subtle bottom border for each item */}
+                    <div className="text-sm text-gray-500">Application ID</div> {/* Slightly darker muted-foreground */}
+                    <div className="font-semibold text-gray-900">{id}</div> {/* Bolder value */}
+                  </div>
+                  <div className="pb-2 border-b border-gray-100">
+                    <div className="text-sm text-gray-500">Emirates ID</div>
+                    <div className="font-semibold text-gray-900">784-1985-1234567-8</div>
+                  </div>
+                  <div className="pb-2 border-b border-gray-100">
+                    <div className="text-sm text-gray-500">Application Type</div>
+                    <div className="font-semibold text-gray-900">Financial Assistance</div>
+                  </div>
+                  <div className="pb-2 border-b border-gray-100">
+                    <div className="text-sm text-gray-500">Submission Date</div>
+                    <div className="font-semibold text-gray-900">May 25, 2023</div>
+                  </div>
+                  <div className="pb-2 border-b border-gray-100">
+                    <div className="text-sm text-gray-500">Contact Phone</div>
+                    <div className="font-semibold text-gray-900">+971 50 123 4567</div>
+                  </div>
+                  {/* AI Confidence section integrated here */}
+                  <div className="col-span-full mt-2"> {/* Ensure it takes full width below basic info */}
+                    <div className="text-sm text-gray-500 mb-2">AI Confidence</div>
+                    <div className="space-y-2">
+                      <div className="flex justify-between items-center">
+                        <span className="text-base font-semibold text-gray-800">Overall Confidence</span> {/* Adjusted size/weight */}
+                        <span className="text-base font-bold text-gray-900">76%</span> {/* Adjusted size/weight */}
+                      </div>
+                      <Progress value={76} className="h-2 bg-gray-200 [&>div]:bg-blue-500" /> {/* Blue progress bar */}
+                      <div className="text-xs text-gray-600">
+                        Medium confidence due to income verification issues and housing documentation.
                       </div>
                     </div>
                   </div>
@@ -1037,11 +1103,6 @@ export function ApplicationDetails({ id }: { id: string }) {
               </div>
 
               <div className="mt-4">
-                <Label htmlFor="comments" className="text-sm font-medium">Comments</Label> {/* Consistent label style */}
-                <Textarea id="comments" placeholder="Add your comments here..." className="mt-1" />
-              </div>
-
-              <div className="mt-4">
                 <Label htmlFor="reason" className="text-sm font-medium">Decision Reasoning</Label> {/* Consistent label style */}
                 <Select>
                   <SelectTrigger id="reason">
@@ -1057,110 +1118,154 @@ export function ApplicationDetails({ id }: { id: string }) {
                   </SelectContent>
                 </Select>
               </div>
+
+              <div className="mt-4">
+                <Label htmlFor="comments" className="text-sm font-medium">Comments</Label> {/* Consistent label style */}
+                <Textarea id="comments" placeholder="Add your comments here..." className="mt-1" />
+              </div>
+              <div className="mt-4">
+                <Button className="w-full"> 
+                  Submit
+                </Button>
+              </div>
             </CardContent>
           </Card>
         </div> {/* End of the two-column grid div */}
 
         {/* Tabs Section */}
-        <Tabs defaultValue="ai-analysis"> {/* Changed defaultValue to "ai-analysis" */}
-          {/* Improved Tab List with better spacing if needed via className for the list */}
-          <TabsList className="grid grid-cols-5 w-full mb-6 h-10"> {/* Adjusted grid-cols to 5 for new tab */}
-            <TabsTrigger value="ai-analysis">AI Analysis</TabsTrigger>
-            <TabsTrigger value="personal">Personal Info</TabsTrigger> {/* Shortened for better fit */}
-            <TabsTrigger value="documents">Documents</TabsTrigger>
-            <TabsTrigger value="history">History</TabsTrigger>
-            <TabsTrigger value="communication">Communication</TabsTrigger> {/* New Tab Trigger */}
+        <Tabs defaultValue="ai-analysis" className="mt-6"> {/* Added margin-top for separation from the top section */}
+          <TabsList className="grid grid-cols-5 w-full h-12 p-1 bg-gray-100 rounded-lg shadow-sm"> 
+            <TabsTrigger
+              value="ai-analysis"
+              className="relative rounded-md px-4 py-2 text-sm font-medium text-gray-700 transition-all duration-200
+                         data-[state=active]:bg-white data-[state=active]:text-blue-700 data-[state=active]:shadow
+                         hover:bg-gray-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2" 
+            >
+              AI Analysis
+            </TabsTrigger>
+            <TabsTrigger
+              value="personal"
+              className="relative rounded-md px-4 py-2 text-sm font-medium text-gray-700 transition-all duration-200
+                         data-[state=active]:bg-white data-[state=active]:text-blue-700 data-[state=active]:shadow
+                         hover:bg-gray-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2"
+            >
+              Personal Info
+            </TabsTrigger>
+            <TabsTrigger
+              value="documents"
+              className="relative rounded-md px-4 py-2 text-sm font-medium text-gray-700 transition-all duration-200
+                         data-[state=active]:bg-white data-[state=active]:text-blue-700 data-[state=active]:shadow
+                         hover:bg-gray-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2"
+            >
+              Documents
+            </TabsTrigger>
+            <TabsTrigger
+              value="history"
+              className="relative rounded-md px-4 py-2 text-sm font-medium text-gray-700 transition-all duration-200
+                         data-[state=active]:bg-white data-[state=active]:text-blue-700 data-[state=active]:shadow
+                         hover:bg-gray-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2"
+            >
+              History
+            </TabsTrigger>
+            <TabsTrigger
+              value="communication"
+              className="relative rounded-md px-4 py-2 text-sm font-medium text-gray-700 transition-all duration-200
+                         data-[state=active]:bg-white data-[state=active]:text-blue-700 data-[state=active]:shadow
+                         hover:bg-gray-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2"
+            >
+              Communication
+            </TabsTrigger>
           </TabsList>
 
-          <TabsContent value="ai-analysis">
+          <TabsContent value="ai-analysis" className="mt-6"> {/* Added margin-top to content */}
             <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
-              <Card className="lg:col-span-2">
+              <Card className="lg:col-span-2 shadow-sm rounded-lg"> {/* Added shadow and rounded corners */}
                 <CardContent className="p-6">
-                  <h3 className="text-lg font-bold mb-4">AI Recommendation</h3> {/* Consistent h3 */}
-                  <div className="p-4 border rounded-md mb-6"> {/* Added mb-6 for spacing */}
-                    <p className="text-sm text-gray-800"> {/* Ensured text-gray-800 for readability */}
+                  <h3 className="text-xl font-bold mb-4 text-gray-800">AI Recommendation</h3> {/* Larger heading, darker text */}
+                  <div className="p-4 border border-gray-200 rounded-md bg-blue-50/50 mb-6 text-gray-800 leading-relaxed"> {/* Lighter background, better text color, leading */}
+                    <p className="mb-3">
                       Aisha was divorced on May 20, 2025.
-                      <br />
-                      <br />
+                    </p>
+                    <p className="mb-3">
                       She meets most eligibility criteria for financial-aid assistance. Her family's income is
                       significantly below the threshold, and the medical necessity is well-documented. The family size
                       and composition also qualify for additional support.
                     </p>
-                    <p className="text-sm mt-3 text-gray-800">However, <b className="text-red-700">manual review is recommended</b> due to two factors:</p> {/* text-red-700 for accessibility */}
-                    <ol className="list-disc list-inside text-sm mt-2 space-y-1 text-gray-800">
-                      <li>Housing verification for the "Family Support" source requires additional documentation</li>
+                    <p className="font-semibold text-red-700 mb-2">However, manual review is recommended due to two factors:</p> {/* Bolded and red for emphasis */}
+                    <ol className="list-disc list-inside text-sm space-y-1 pl-4"> {/* Indented list */}
+                      <li>Housing verification for the "Family Support" source requires additional documentation.</li>
                       <li>
                         Previous financial aid was received within the past 12 months, requiring assessment of ongoing
                         need.
                       </li>
                     </ol>
-                    <p className="text-sm mt-3 text-gray-800">
+                    <p className="mt-3">
                       The AI system recommends approval with verification of the housing documentation.
                     </p>
                   </div>
 
-                  <div className="border rounded-md p-3 space-y-6">
-                    <h3 className="text-lg font-bold mb-4">Eligibility Assessment</h3> {/* Consistent h3 */}
+                  <div className="border border-gray-200 rounded-md p-6 space-y-6"> {/* Bordered section */}
+                    <h3 className="text-xl font-bold mb-4 text-gray-800">Eligibility Assessment</h3> {/* Larger heading, darker text */}
                     <div className="space-y-6">
 
                       {/* Income Threshold - Eligible */}
                       <div className="flex items-start space-x-3">
-                        <CheckCircleIcon size={24} className="text-green-500 flex-shrink-0 mt-0.5" />
+                        <CheckCircleIcon size={24} className="text-green-600 flex-shrink-0 mt-0.5" /> {/* Darker green */}
                         <div className="flex-grow">
-                          <span className="font-bold text-gray-900">Income Threshold</span> {/* Consistent font-bold */}
+                          <span className="font-semibold text-gray-900">Income Threshold</span>
                           <div className="text-sm text-gray-600">
                             Family income (AED 6,500) is below the threshold (AED 10,000) for healthcare assistance.
                           </div>
                         </div>
-                        <span className="ml-auto font-medium text-green-700 text-right">Eligible</span> {/* text-green-700 for accessibility */}
+                        <span className="ml-auto font-medium text-green-700 text-right">Eligible</span>
                       </div>
 
                       {/* Family Size Criteria - Eligible */}
                       <div className="flex items-start space-x-3">
-                        <CheckCircleIcon size={24} className="text-green-500 flex-shrink-0 mt-0.5" />
+                        <CheckCircleIcon size={24} className="text-green-600 flex-shrink-0 mt-0.5" />
                         <div className="flex-grow">
-                          <span className="font-bold text-gray-900">Family Size Criteria</span> {/* Consistent font-bold */}
+                          <span className="font-semibold text-gray-900">Family Size Criteria</span>
                           <div className="text-sm text-gray-600">
                             Family size (3 members) meets criteria for additional support.
                           </div>
                         </div>
-                        <span className="ml-auto font-medium text-green-700 text-right">Eligible</span> {/* text-green-700 for accessibility */}
+                        <span className="ml-auto font-medium text-green-700 text-right">Eligible</span>
                       </div>
 
                       {/* Residency Requirements - Eligible */}
                       <div className="flex items-start space-x-3">
-                        <CheckCircleIcon size={24} className="text-green-500 flex-shrink-0 mt-0.5" />
+                        <CheckCircleIcon size={24} className="text-green-600 flex-shrink-0 mt-0.5" />
                         <div className="flex-grow">
-                          <span className="font-bold text-gray-900">Residency Requirements</span> {/* Consistent font-bold */}
+                          <span className="font-semibold text-gray-900">Residency Requirements</span>
                           <div className="text-sm text-gray-600">
                             UAE citizen with valid Emirates ID and family book.
                           </div>
                         </div>
-                        <span className="ml-auto font-medium text-green-700 text-right">Eligible</span> {/* text-green-700 for accessibility */}
+                        <span className="ml-auto font-medium text-green-700 text-right">Eligible</span>
                       </div>
 
-                      {/* Previous Support - Review Needed (Changed icon and color to red) */}
+                      {/* Previous Support - Review Needed */}
                       <div className="flex items-start space-x-3">
-                        <ExclamationTriangleIcon size={24} className="text-red-500 flex-shrink-0 mt-0.5" /> {/* text-red-500 for icon */}
+                        <ExclamationTriangleIcon size={24} className="text-red-500 flex-shrink-0 mt-0.5" />
                         <div className="flex-grow">
-                          <span className="font-bold text-gray-900">Previous Support</span> {/* Consistent font-bold */}
+                          <span className="font-semibold text-gray-900">Previous Support</span>
                           <div className="text-sm text-gray-600">
                             Received financial aid 8 months ago (AED 15,000).
                           </div>
                         </div>
-                        <span className="ml-auto font-medium text-red-700 text-right">Review Needed</span> {/* text-red-700 for accessibility */}
+                        <span className="ml-auto font-medium text-red-700 text-right">Review Needed</span>
                       </div>
 
-                      {/* Medical Necessity - Emergency/Urgency (New icon and color) */}
+                      {/* Medical Necessity - Emergency/Urgency */}
                       <div className="flex items-start space-x-3">
-                        <MedicalEmergencyIcon size={24} className="text-blue-500 flex-shrink-0 mt-0.5" />
+                        <MedicalEmergencyIcon size={24} className="text-blue-600 flex-shrink-0 mt-0.5" /> {/* Darker blue */}
                         <div className="flex-grow">
-                          <span className="font-bold text-gray-900">Medical Necessity</span> {/* Consistent font-bold */}
+                          <span className="font-semibold text-gray-900">Medical Necessity</span>
                           <div className="text-sm text-gray-600">
                             Medical records confirm chronic condition requiring ongoing treatment.
                           </div>
                         </div>
-                        <span className="ml-auto font-medium text-blue-700 text-right">High Need</span> {/* text-blue-700 for accessibility */}
+                        <span className="ml-auto font-medium text-blue-700 text-right">High Need</span>
                       </div>
                     </div>
                   </div>
@@ -1168,46 +1273,46 @@ export function ApplicationDetails({ id }: { id: string }) {
               </Card>
 
               <div className="space-y-6">
-                <Card>
+                <Card className="shadow-sm rounded-lg">
                   <CardContent className="p-6">
-                    <h3 className="text-lg font-bold mb-4">Risk Assessment</h3> {/* Consistent h3 */}
+                    <h3 className="text-xl font-bold mb-4 text-gray-800">Risk Assessment</h3> {/* Larger heading, darker text */}
                     <div className="space-y-4">
-                      <div className="border rounded-md p-3">
+                      <div className="border border-gray-200 rounded-md p-3 bg-yellow-50/50"> {/* Subtle yellow background */}
                         <div className="flex items-center justify-between">
-                          <div className="font-medium">Overall Risk</div>
-                          <div className="px-2 py-1 rounded-full bg-yellow-100 text-yellow-800 text-xs font-medium"> {/* Changed to yellow */}
+                          <div className="font-semibold text-gray-900">Overall Risk</div>
+                          <div className="px-2 py-1 rounded-full bg-yellow-100 text-yellow-800 text-xs font-medium">
                             Medium
                           </div>
                         </div>
                       </div>
 
                       <div className="grid grid-cols-2 gap-3">
-                        <div className="border rounded-md p-3">
-                          <div className="text-sm font-medium">Document Consistency</div>
+                        <div className="border border-gray-200 rounded-md p-3">
+                          <div className="text-sm font-semibold text-gray-800">Document Consistency</div>
                           <div className="mt-1 flex items-center">
                             <div className="h-2 w-2 rounded-full bg-green-500 mr-2"></div>
-                            <span className="text-sm text-gray-800">Low Risk</span> {/* Consistent text-gray-800 */}
+                            <span className="text-sm text-gray-700">Low Risk</span>
                           </div>
                         </div>
-                        <div className="border rounded-md p-3">
-                          <div className="text-sm font-medium">Identity Verification</div>
+                        <div className="border border-gray-200 rounded-md p-3">
+                          <div className="text-sm font-semibold text-gray-800">Identity Verification</div>
                           <div className="mt-1 flex items-center">
                             <div className="h-2 w-2 rounded-full bg-green-500 mr-2"></div>
-                            <span className="text-sm text-gray-800">Low Risk</span> {/* Consistent text-gray-800 */}
+                            <span className="text-sm text-gray-700">Low Risk</span>
                           </div>
                         </div>
-                        <div className="border rounded-md p-3">
-                          <div className="text-sm font-medium">Housing Verification</div>
+                        <div className="border border-gray-200 rounded-md p-3 bg-yellow-50/50"> {/* Subtle yellow background */}
+                          <div className="text-sm font-semibold text-gray-800">Housing Verification</div>
                           <div className="mt-1 flex items-center">
-                            <div className="h-2 w-2 rounded-full bg-yellow-500 mr-2"></div> {/* Consistent yellow-500 */}
-                            <span className="text-sm text-gray-800">Medium Risk</span> {/* Consistent text-gray-800 */}
+                            <div className="h-2 w-2 rounded-full bg-yellow-500 mr-2"></div>
+                            <span className="text-sm text-gray-700">Medium Risk</span>
                           </div>
                         </div>
-                        <div className="border rounded-md p-3">
-                          <div className="text-sm font-medium">Duplicate Applications</div>
+                        <div className="border border-gray-200 rounded-md p-3">
+                          <div className="text-sm font-semibold text-gray-800">Duplicate Applications</div>
                           <div className="mt-1 flex items-center">
                             <div className="h-2 w-2 rounded-full bg-green-500 mr-2"></div>
-                            <span className="text-sm text-gray-800">Low Risk</span> {/* Consistent text-gray-800 */}
+                            <span className="text-sm text-gray-700">Low Risk</span>
                           </div>
                         </div>
                       </div>
@@ -1215,29 +1320,29 @@ export function ApplicationDetails({ id }: { id: string }) {
                   </CardContent>
                 </Card>
 
-                <Card>
+                <Card className="shadow-sm rounded-lg">
                   <CardContent className="p-6">
-                    <h3 className="text-lg font-bold mb-4">Cross-Reference Results</h3> {/* Consistent h3 */}
+                    <h3 className="text-xl font-bold mb-4 text-gray-800">Cross-Reference Results</h3> {/* Larger heading, darker text */}
                     <div className="space-y-3">
                       <div className="flex items-center justify-between border-b pb-2">
-                        <span className="text-sm text-gray-800">Ministry of Interior</span> {/* Consistent text-gray-800 */}
-                        <span className="text-sm font-medium text-green-700">Verified</span> {/* text-green-700 for accessibility */}
+                        <span className="text-sm text-gray-700">Ministry of Interior</span>
+                        <span className="text-sm font-medium text-green-700">Verified</span>
                       </div>
                       <div className="flex items-center justify-between border-b pb-2">
-                        <span className="text-sm text-gray-800">Ministry of Health</span> {/* Consistent text-gray-800 */}
-                        <span className="text-sm font-medium text-green-700">Verified</span> {/* text-green-700 for accessibility */}
+                        <span className="text-sm text-gray-700">Ministry of Health</span>
+                        <span className="text-sm font-medium text-green-700">Verified</span>
                       </div>
                       <div className="flex items-center justify-between border-b pb-2">
-                        <span className="text-sm text-gray-800">Ministry of Education</span> {/* Consistent text-gray-800 */}
-                        <span className="text-sm font-medium text-green-700">Verified</span> {/* text-green-700 for accessibility */}
+                        <span className="text-sm text-gray-700">Ministry of Education</span>
+                        <span className="text-sm font-medium text-green-700">Verified</span>
                       </div>
                       <div className="flex items-center justify-between border-b pb-2">
-                        <span className="text-sm text-gray-800">Previous Support Database</span> {/* Consistent text-gray-800 */}
-                        <span className="text-sm font-medium text-red-700">Review Needed</span> {/* text-red-700 for accessibility */}
+                        <span className="text-sm text-gray-700">Previous Support Database</span>
+                        <span className="text-sm font-medium text-red-700">Review Needed</span>
                       </div>
                       <div className="flex items-center justify-between pb-2">
-                        <span className="text-sm text-gray-800">Financial Institutions</span> {/* Consistent text-gray-800 */}
-                        <span className="text-sm font-medium text-green-700">Verified</span> {/* text-green-700 for accessibility */}
+                        <span className="text-sm text-gray-700">Financial Institutions</span>
+                        <span className="text-sm font-medium text-green-700">Verified</span>
                       </div>
                     </div>
                   </CardContent>
@@ -1246,11 +1351,11 @@ export function ApplicationDetails({ id }: { id: string }) {
             </div>
           </TabsContent>
 
-          <TabsContent value="personal">
+          <TabsContent value="personal" className="mt-6"> {/* Added margin-top to content */}
             <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
-              <Card className="lg:col-span-2">
+              <Card className="lg:col-span-2 shadow-sm rounded-lg">
                 <CardContent className="p-6">
-                  <h3 className="text-lg font-bold mb-4">Family Tree</h3> {/* Consistent h3 */}
+                  <h3 className="text-xl font-bold mb-4 text-gray-800">Family Tree</h3>
                   <div className="bg-slate-50 rounded-lg p-6 flex flex-col items-center justify-center text-center text-sm font-mono whitespace-pre-wrap">
                     {/* Dummy Family Tree Visualization */}
                     {`
@@ -1258,8 +1363,8 @@ export function ApplicationDetails({ id }: { id: string }) {
                       |  Aisha   |
                       | (Self)   |
                       +----+-----+
-                           |
-                           |
+                     |
+                     |
                    +-------+-------+
                    |               |
              +-----+-----+   +-----+-----+
@@ -1272,7 +1377,7 @@ export function ApplicationDetails({ id }: { id: string }) {
                     </p>
                   </div>
 
-                  <h3 className="text-lg font-bold mt-6 mb-4">Family Members</h3> {/* Consistent h3 */}
+                  <h3 className="text-xl font-bold mt-6 mb-4 text-gray-800">Family Members</h3>
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                     <PersonCard
                       name="Aisha Al-Mansouri"
@@ -1300,83 +1405,83 @@ export function ApplicationDetails({ id }: { id: string }) {
               </Card>
 
               <div className="space-y-6">
-                <Card>
+                <Card className="shadow-sm rounded-lg">
                   <CardContent className="p-6">
-                    <h3 className="text-lg font-bold mb-4">Income Sources</h3> {/* Consistent h3 */}
+                    <h3 className="text-xl font-bold mb-4 text-gray-800">Income Sources</h3>
                     <div className="space-y-4">
-                      <div className="flex justify-between items-center">
+                      <div className="flex justify-between items-center pb-2 border-b border-gray-100"> {/* Added border-b */}
                         <div>
-                          <div className="font-medium text-gray-800">Previous Employment</div> {/* Consistent text-gray-800 */}
+                          <div className="font-medium text-gray-800">Previous Employment</div>
                           <div className="text-sm text-muted-foreground">Monthly</div>
                         </div>
                         <div className="text-right">
-                          <div className="font-medium text-gray-800">AED 4,500</div> {/* Consistent text-gray-800 */}
-                          <div className="text-xs text-green-700">Verified</div> {/* text-green-700 for accessibility */}
+                          <div className="font-medium text-gray-800">AED 4,500</div>
+                          <div className="text-xs text-green-700">Verified</div>
                         </div>
                       </div>
-                      <div className="flex justify-between items-center">
+                      <div className="flex justify-between items-center pb-2 border-b border-gray-100"> {/* Added border-b */}
                         <div>
-                          <div className="font-medium text-gray-800">Family Support</div> {/* Consistent text-gray-800 */}
+                          <div className="font-medium text-gray-800">Family Support</div>
                           <div className="text-sm text-muted-foreground">Monthly</div>
                         </div>
                         <div className="text-right">
-                          <div className="font-medium text-gray-800">AED 2,000</div> {/* Consistent text-gray-800 */}
-                          <div className="text-xs text-yellow-700">Pending Verification</div> {/* text-yellow-700 for accessibility */}
+                          <div className="font-medium text-gray-800">AED 2,000</div>
+                          <div className="text-xs text-yellow-700">Pending Verification</div>
                         </div>
                       </div>
-                      <div className="pt-2 border-t">
+                      <div className="pt-2">
                         <div className="flex justify-between items-center">
-                          <div className="font-bold text-gray-900">Total Monthly Income</div> {/* Consistent font-bold */}
-                          <div className="font-bold text-gray-900">AED 6,500</div> {/* Consistent font-bold */}
+                          <div className="font-bold text-gray-900">Total Monthly Income</div>
+                          <div className="font-bold text-gray-900">AED 6,500</div>
                         </div>
                       </div>
                     </div>
                   </CardContent>
                 </Card>
 
-                <Card>
+                <Card className="shadow-sm rounded-lg">
                   <CardContent className="p-6">
-                    <h3 className="text-lg font-bold mb-4">Assets Summary</h3> {/* Consistent h3 */}
+                    <h3 className="text-xl font-bold mb-4 text-gray-800">Assets Summary</h3>
                     <div className="space-y-3">
-                      <div className="flex justify-between">
-                        <span className="text-sm text-gray-800">Bank Accounts</span> {/* Consistent text-gray-800 */}
-                        <span className="font-medium text-gray-900">AED 12,500</span> {/* Consistent text-gray-900 */}
+                      <div className="flex justify-between pb-2 border-b border-gray-100"> {/* Added border-b */}
+                        <span className="text-sm text-gray-800">Bank Accounts</span>
+                        <span className="font-medium text-gray-900">AED 12,500</span>
+                      </div>
+                      <div className="flex justify-between pb-2 border-b border-gray-100"> {/* Added border-b */}
+                        <span className="text-sm text-gray-800">Vehicles</span>
+                        <span className="font-medium text-gray-900">1 (2015 Toyota)</span>
+                      </div>
+                      <div className="flex justify-between pb-2 border-b border-gray-100"> {/* Added border-b */}
+                        <span className="text-sm text-gray-800">Properties</span>
+                        <span className="font-medium text-gray-900">None</span>
                       </div>
                       <div className="flex justify-between">
-                        <span className="text-sm text-gray-800">Vehicles</span> {/* Consistent text-gray-800 */}
-                        <span className="font-medium text-gray-900">1 (2015 Toyota)</span> {/* Consistent text-gray-900 */}
-                      </div>
-                      <div className="flex justify-between">
-                        <span className="text-sm text-gray-800">Properties</span> {/* Consistent text-gray-800 */}
-                        <span className="font-medium text-gray-900">None</span> {/* Consistent text-gray-900 */}
-                      </div>
-                      <div className="flex justify-between">
-                        <span className="text-sm text-gray-800">Investments</span> {/* Consistent text-gray-800 */}
-                        <span className="font-medium text-gray-900">None</span> {/* Consistent text-gray-900 */}
+                        <span className="text-sm text-gray-800">Investments</span>
+                        <span className="font-medium text-gray-900">None</span>
                       </div>
                     </div>
                   </CardContent>
                 </Card>
 
-                <Card>
+                <Card className="shadow-sm rounded-lg">
                   <CardContent className="p-6">
-                    <h3 className="text-lg font-bold mb-4">Housing Situation</h3> {/* Consistent h3 */}
+                    <h3 className="text-xl font-bold mb-4 text-gray-800">Housing Situation</h3>
                     <div className="space-y-3">
-                      <div className="flex justify-between">
-                        <span className="text-sm text-gray-800">Housing Type</span> {/* Consistent text-gray-800 */}
-                        <span className="font-medium text-gray-900">Rented Apartment</span> {/* Consistent text-gray-900 */}
+                      <div className="flex justify-between pb-2 border-b border-gray-100"> {/* Added border-b */}
+                        <span className="text-sm text-gray-800">Housing Type</span>
+                        <span className="font-medium text-gray-900">Rented Apartment</span>
+                      </div>
+                      <div className="flex justify-between pb-2 border-b border-gray-100"> {/* Added border-b */}
+                        <span className="text-sm text-gray-800">Monthly Rent</span>
+                        <span className="font-medium text-gray-900">AED 5,500</span>
+                      </div>
+                      <div className="flex justify-between pb-2 border-b border-gray-100"> {/* Added border-b */}
+                        <span className="text-sm text-gray-800">Location</span>
+                        <span className="font-medium text-gray-900">Al Nahda, Sharjah</span>
                       </div>
                       <div className="flex justify-between">
-                        <span className="text-sm text-gray-800">Monthly Rent</span> {/* Consistent text-gray-800 */}
-                        <span className="font-medium text-gray-900">AED 5,500</span> {/* Consistent text-gray-900 */}
-                      </div>
-                      <div className="flex justify-between">
-                        <span className="text-sm text-gray-800">Location</span> {/* Consistent text-gray-800 */}
-                        <span className="font-medium text-gray-900">Al Nahda, Sharjah</span> {/* Consistent text-gray-900 */}
-                      </div>
-                      <div className="flex justify-between">
-                        <span className="text-sm text-gray-800">Contract Expiry</span> {/* Consistent text-gray-800 */}
-                        <span className="font-medium text-gray-900">March 15, 2024</span> {/* Consistent text-gray-900 */}
+                        <span className="text-sm text-gray-800">Contract Expiry</span>
+                        <span className="font-medium text-gray-900">March 15, 2024</span>
                       </div>
                     </div>
                   </CardContent>
@@ -1385,19 +1490,19 @@ export function ApplicationDetails({ id }: { id: string }) {
             </div>
           </TabsContent>
 
-          <TabsContent value="documents">
+          <TabsContent value="documents" className="mt-6"> {/* Added margin-top to content */}
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
               <DocumentCard
                 title="Rental Agreement"
                 status="Needs Review"
                 confidence={78}
-                previewUrl="" // Distinct placeholder
+                previewUrl="https://via.placeholder.com/320x200/F0F4F8/8D99AE?text=Rental+Agreement+Preview" // Distinct placeholder
               />
               <DocumentCard
                 title="Previous Support Documents"
                 status="Needs Review"
                 confidence={82}
-                previewUrl="" // Distinct placeholder
+                previewUrl="https://via.placeholder.com/320x200/F0F4F8/8D99AE?text=Previous+Support+Preview" // Distinct placeholder
               />
               <DocumentCard
                 title="Emirates ID"
@@ -1409,46 +1514,46 @@ export function ApplicationDetails({ id }: { id: string }) {
                 title="Medical Records"
                 status="Verified"
                 confidence={92}
-                previewUrl="" // Distinct placeholder
+                previewUrl="https://via.placeholder.com/320x200/F0F4F8/8D99AE?text=Medical+Records+Preview" // Distinct placeholder
               />
               <DocumentCard
                 title="Income Statement"
                 status="Verified"
                 confidence={96}
-                previewUrl="" // Distinct placeholder
+                previewUrl="https://via.placeholder.com/320x200/F0F4F8/8D99AE?text=Income+Statement+Preview" // Distinct placeholder
               />
               <DocumentCard
                 title="Bank Statements"
                 status="Verified"
                 confidence={90}
-                previewUrl="" // Distinct placeholder
+                previewUrl="https://via.placeholder.com/320x200/F0F4F8/8D99AE?text=Bank+Statements+Preview" // Distinct placeholder
               />
               <DocumentCard
                 title="Medical Insurance Card"
                 status="Verified"
                 confidence={96}
-                previewUrl="" // Distinct placeholder
+                previewUrl="https://via.placeholder.com/320x200/F0F4F8/8D99AE?text=Insurance+Card+Preview" // Distinct placeholder
               />
               <DocumentCard
                 title="Utility Bills"
                 status="Verified"
                 confidence={88}
-                previewUrl="" // Distinct placeholder
+                previewUrl="https://via.placeholder.com/320x200/F0F4F8/8D99AE?text=Utility+Bills+Preview" // Distinct placeholder
               />
               <DocumentCard
                 title="Family Book"
                 status="Verified"
                 confidence={95}
-                previewUrl="" // Distinct placeholder
+                previewUrl="https://via.placeholder.com/320x200/F0F4F8/8D99AE?text=Family+Book+Preview" // Distinct placeholder
               />
             </div>
           </TabsContent>
 
-          <TabsContent value="history">
+          <TabsContent value="history" className="mt-6"> {/* Added margin-top to content */}
             <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
-              <Card className="lg:col-span-2">
+              <Card className="lg:col-span-2 shadow-sm rounded-lg">
                 <CardContent className="p-6">
-                  <h3 className="text-lg font-bold mb-4">Application Timeline</h3> {/* Consistent h3 */}
+                  <h3 className="text-xl font-bold mb-4 text-gray-800">Application Timeline</h3>
                   <div className="space-y-6">
                     <TimelineItem
                       date="May 23, 2023"
@@ -1487,14 +1592,14 @@ export function ApplicationDetails({ id }: { id: string }) {
                     />
                     <TimelineItem
                       date="May 25, 2023"
-                      time="09:16 AM" 
+                      time="09:16 AM"
                       title="AI Eligibility Assessment"
                       description="Automated assessment of eligibility criteria and cross-reference verification"
                       status="completed"
                     />
                     <TimelineItem
                       date="May 25, 2023"
-                      time="09:16 AM" 
+                      time="09:16 AM"
                       title="Flagged for Review"
                       description="Application flagged for human review due to housing verification and previous support history"
                       status="completed"
@@ -1525,13 +1630,13 @@ export function ApplicationDetails({ id }: { id: string }) {
               </Card>
 
               <div className="space-y-6">
-                <Card>
+                <Card className="shadow-sm rounded-lg">
                   <CardContent className="p-6">
-                    <h3 className="text-lg font-bold mb-4">Previous Applications</h3> {/* Consistent h3 */}
+                    <h3 className="text-xl font-bold mb-4 text-gray-800">Previous Applications</h3>
                     <div className="space-y-4">
                       <div className="border rounded-md p-3">
                         <div className="flex justify-between">
-                          <div className="font-medium text-gray-800">Financial Aid</div> {/* Consistent text-gray-800 */}
+                          <div className="font-medium text-gray-800">Financial Aid</div>
                           <div className="px-2 py-0.5 rounded-full bg-green-100 text-green-800 text-xs font-medium">
                             Approved
                           </div>
@@ -1539,90 +1644,90 @@ export function ApplicationDetails({ id }: { id: string }) {
                         <div className="text-sm text-muted-foreground mt-1">
                           September 15, 2022 • ID: UAE-2022-45678
                         </div>
-                        <div className="text-sm mt-2 text-gray-800">One-time financial assistance of AED 15,000</div> {/* Consistent text-gray-800 */}
+                        <div className="text-sm mt-2 text-gray-800">One-time financial assistance of AED 15,000</div>
                       </div>
                       <div className="border rounded-md p-3">
                         <div className="flex justify-between">
-                          <div className="font-medium text-gray-800">Education Support</div> {/* Consistent text-gray-800 */}
+                          <div className="font-medium text-gray-800">Education Support</div>
                           <div className="px-2 py-0.5 rounded-full bg-green-100 text-green-800 text-xs font-medium">
                             Approved
                           </div>
                         </div>
                         <div className="text-sm text-muted-foreground mt-1">August 10, 2021 • ID: UAE-2021-34567</div>
-                        <div className="text-sm mt-2 text-gray-800">School fees assistance for 3 children</div> {/* Consistent text-gray-800 */}
+                        <div className="text-sm mt-2 text-gray-800">School fees assistance for 3 children</div>
                       </div>
                     </div>
                   </CardContent>
                 </Card>
 
-                <Card>
+                <Card className="shadow-sm rounded-lg">
                   <CardContent className="p-6">
-                    <h3 className="text-lg font-bold mb-4">Payment History</h3> {/* Consistent h3 */}
+                    <h3 className="text-xl font-bold mb-4 text-gray-800">Payment History</h3>
                     <div className="space-y-3">
-                      <div className="flex justify-between border-b pb-2">
+                      <div className="flex justify-between border-b pb-2"> {/* Added border-b */}
                         <div>
-                          <div className="text-sm font-medium text-gray-800">Financial Aid</div> {/* Consistent text-gray-800 */}
+                          <div className="text-sm font-medium text-gray-800">Financial Aid</div>
                           <div className="text-xs text-muted-foreground">September 20, 2022</div>
                         </div>
                         <div className="text-right">
-                          <div className="font-medium text-gray-900">AED 15,000</div> {/* Consistent text-gray-900 */}
-                          <div className="text-xs text-green-700">Disbursed</div> {/* text-green-700 for accessibility */}
+                          <div className="font-medium text-gray-900">AED 15,000</div>
+                          <div className="text-xs text-green-700">Disbursed</div>
                         </div>
                       </div>
-                      <div className="flex justify-between border-b pb-2">
+                      <div className="flex justify-between border-b pb-2"> {/* Added border-b */}
                         <div>
-                          <div className="text-sm font-medium text-gray-800">Education Support</div> {/* Consistent text-gray-800 */}
+                          <div className="text-sm font-medium text-gray-800">Education Support</div>
                           <div className="text-xs text-muted-foreground">August 15, 2021</div>
                         </div>
                         <div className="text-right">
-                          <div className="font-medium text-gray-900">AED 12,000</div> {/* Consistent text-gray-900 */}
-                          <div className="text-xs text-green-700">Disbursed</div> {/* text-green-700 for accessibility */}
+                          <div className="font-medium text-gray-900">AED 12,000</div>
+                          <div className="text-xs text-green-700">Disbursed</div>
                         </div>
                       </div>
                       <div className="flex justify-between">
                         <div>
-                          <div className="text-sm font-medium text-gray-800">Education Support</div> {/* Consistent text-gray-800 */}
+                          <div className="text-sm font-medium text-gray-800">Education Support</div>
                           <div className="text-xs text-muted-foreground">January 10, 2022</div>
                         </div>
                         <div className="text-right">
-                          <div className="font-medium text-gray-900">AED 12,000</div> {/* Consistent text-gray-900 */}
-                          <div className="text-xs text-green-700">Disbursed</div> {/* text-green-700 for accessibility */}
+                          <div className="font-medium text-gray-900">AED 12,000</div>
+                          <div className="text-xs text-green-700">Disbursed</div>
                         </div>
                       </div>
                     </div>
                   </CardContent>
                 </Card>
 
-                <Card>
+                <Card className="shadow-sm rounded-lg">
                   <CardContent className="p-6">
-                    <h3 className="text-lg font-bold mb-4">Case Notes</h3> {/* Consistent h3 */}
+                    <h3 className="text-xl font-bold mb-4 text-gray-800">Case Notes</h3>
                     <div className="space-y-4">
-                      <div className="border-b pb-3">
+                      <div className="border-b pb-3"> {/* Added border-b */}
                         <div className="flex justify-between">
-                          <div className="font-medium text-sm text-gray-800">Fatima Al-Zaabi</div> {/* Consistent text-gray-800 */}
+                          <div className="font-medium text-sm text-gray-800">Fatima Al-Zaabi</div>
                           <div className="text-xs text-muted-foreground">September 18, 2022</div>
                         </div>
-                        <p className="text-sm mt-1 text-gray-800"> {/* Consistent text-gray-800 */}
+                        <p className="text-sm mt-1 text-gray-800">
                           Applicant demonstrated significant financial need due to job loss. Recommended approval for
                           one-time financial assistance.
                         </p>
                       </div>
-                      <div className="border-b pb-3">
+                      <div className="border-b pb-3"> {/* Added border-b */}
                         <div className="flex justify-between">
-                          <div className="font-medium text-sm text-gray-800">Ahmed Al-Suwaidi</div> {/* Consistent text-gray-800 */}
+                          <div className="font-medium text-sm text-gray-800">Ahmed Al-Suwaidi</div>
                           <div className="text-xs text-muted-foreground">August 8, 2021</div>
                         </div>
-                        <p className="text-sm mt-1 text-gray-800"> {/* Consistent text-gray-800 */}
+                        <p className="text-sm mt-1 text-gray-800">
                           Family has three school-aged children with education expenses exceeding current income.
                           Approved for education support program.
                         </p>
                       </div>
                       <div>
                         <div className="flex justify-between">
-                          <div className="font-medium text-sm text-gray-800">System Note</div> {/* Consistent text-gray-800 */}
+                          <div className="font-medium text-sm text-gray-800">System Note</div>
                           <div className="text-xs text-muted-foreground">May 26, 2023</div>
                         </div>
-                        <p className="text-sm mt-1 text-gray-800"> {/* Consistent text-gray-800 */}
+                        <p className="text-sm mt-1 text-gray-800">
                           AI system flagged application for human review due to income verification issues and previous
                           support history.
                         </p>
@@ -1634,12 +1739,12 @@ export function ApplicationDetails({ id }: { id: string }) {
             </div>
           </TabsContent>
 
-          {/* New Communication Tab Content */}
-          <TabsContent value="communication">
+          {/* Communication Tab Content */}
+          <TabsContent value="communication" className="mt-6"> {/* Added margin-top to content */}
             <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
-              <Card className="lg:col-span-2">
-                <CardContent className="p-6 h-[500px] flex flex-col"> {/* Fixed height for chat */}
-                  <h3 className="text-lg font-bold mb-4">Chat with Aisha Al-Mansouri</h3>
+              <Card className="lg:col-span-2 shadow-sm rounded-lg">
+                <CardContent className="p-6 h-[500px] flex flex-col">
+                  <h3 className="text-xl font-bold mb-4 text-gray-800">Chat with Aisha Al-Mansouri</h3>
                   <div className="flex-1 overflow-y-auto space-y-4 p-4 border rounded-md bg-gray-50 mb-4">
                     {/* Dummy Chat Messages */}
                     <div className="flex justify-start">
@@ -1674,9 +1779,9 @@ export function ApplicationDetails({ id }: { id: string }) {
               </Card>
 
               <div className="space-y-6">
-                <Card>
+                <Card className="shadow-sm rounded-lg">
                   <CardContent className="p-6">
-                    <h3 className="text-lg font-bold mb-4">Schedule Communication</h3>
+                    <h3 className="text-xl font-bold mb-4 text-gray-800">Schedule Communication</h3>
                     <div className="space-y-3">
                       <Button className="w-full" variant="outline">
                         <Phone className="mr-2 h-4 w-4" /> Schedule Call
@@ -1691,13 +1796,13 @@ export function ApplicationDetails({ id }: { id: string }) {
                   </CardContent>
                 </Card>
 
-                <Card>
+                <Card className="shadow-sm rounded-lg">
                   <CardContent className="p-6">
-                    <h3 className="text-lg font-bold mb-4">Contact Information</h3>
-                    <div className="space-y-2 text-sm">
-                      <p><span className="font-medium">Phone:</span> +971 50 123 4567</p>
-                      <p><span className="font-medium">Email:</span> aisha.mansouri@example.com</p>
-                      <p><span className="font-medium">Preferred Method:</span> Phone</p>
+                    <h3 className="text-xl font-bold mb-4 text-gray-800">Contact Information</h3>
+                    <div className="space-y-2 text-base"> {/* Adjusted text size */}
+                      <p><span className="font-semibold text-gray-900">Phone:</span> +971 50 123 4567</p> {/* Darker text, bolder label */}
+                      <p><span className="font-semibold text-gray-900">Email:</span> aisha.mansouri@example.com</p>
+                      <p><span className="font-semibold text-gray-900">Preferred Method:</span> Phone</p>
                     </div>
                   </CardContent>
                 </Card>
