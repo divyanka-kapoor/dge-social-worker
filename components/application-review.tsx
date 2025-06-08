@@ -1,27 +1,121 @@
-"use client"
+"use client";
 
-import { useState } from "react"
-import { useRouter } from "next/navigation"
-import Image from "next/image"
-import { Calendar, Search, SlidersHorizontal, Menu } from "lucide-react"
+import { useState } from "react";
+import { useRouter } from "next/navigation";
+import Image from "next/image";
+import { Calendar, Search, SlidersHorizontal, Menu } from "lucide-react";
 
-import { Button } from "@/components/ui/button"
-import { Card, CardContent } from "@/components/ui/card"
-import { DashboardHeader } from "@/components/dashboard-header"
-import { DashboardShell } from "@/components/dashboard-shell"
-import { Input } from "@/components/ui/input"
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
-import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover"
-import { Checkbox } from "@/components/ui/checkbox"
-import { Label } from "@/components/ui/label"
-import { Separator } from "@/components/ui/separator"
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
-import { Progress } from "@/components/ui/progress"
-import { Textarea } from "@/components/ui/textarea"
+import { Button } from "@/components/ui/button";
+import { Card, CardContent } from "@/components/ui/card";
+import { DashboardHeader } from "@/components/dashboard-header";
+import { DashboardShell } from "@/components/dashboard-shell";
+import { Input } from "@/components/ui/input";
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
+import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
+import { Checkbox } from "@/components/ui/checkbox";
+import { Label } from "@/components/ui/label";
+import { Separator } from "@/components/ui/separator";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { Progress } from "@/components/ui/progress";
+import { Textarea } from "@/components/ui/textarea";
+import { ReactNode } from "react"; // Import ReactNode for typing
 
-// Add this function before the component
-function getApplicationData(applicationId: string) {
-  const applicationDetails = {
+// Type definitions
+interface FamilyMember {
+  name: string;
+  relation: string;
+  age: number;
+  occupation: string;
+}
+
+interface IncomeSource {
+  source: string;
+  amount: string;
+  frequency: string;
+  verified: string;
+}
+
+interface Housing {
+  housingType: string;
+  monthlyRent: string;
+  location: string;
+  contractExpiry: string;
+}
+
+interface Eligibility {
+  criteria: string;
+  status: string;
+  score: number;
+  description: string;
+}
+
+interface RiskFactor {
+  factor: string;
+  level: string;
+}
+
+interface Document {
+  title: string;
+  status: string;
+  confidence: number;
+}
+
+interface TimelineEvent {
+  date: string;
+  title: string;
+  description: string;
+  current: boolean;
+}
+
+interface PreviousApplication {
+  type: string;
+  status: string;
+  date: string;
+  id: string;
+  description: string;
+}
+
+interface AIKeyFactor {
+  type: "positive" | "concern";
+  text: string;
+}
+
+interface RiskFlag {
+  title: string;
+  description: string;
+}
+
+interface AIRecommendation {
+  type: "approve" | "review";
+  recommendation: string;
+  confidence: number;
+  keyFactors: AIKeyFactor[];
+  riskFlags: RiskFlag[];
+}
+
+interface ApplicationData {
+  name: string;
+  arabicName: string;
+  emiratesId: string;
+  contact: string;
+  familySize: number;
+  type: string;
+  familyMembers: FamilyMember[];
+  incomeSources: IncomeSource[];
+  housing: Housing;
+  aiAnalysis: {
+    eligibility: Eligibility[];
+    riskFactors: RiskFactor[];
+  };
+  documents: Document[];
+  timeline: TimelineEvent[];
+  previousApplications: PreviousApplication[];
+  aiRecommendation: AIRecommendation;
+}
+
+// Application data with index signature
+function getApplicationData(applicationId: string): ApplicationData {
+  const applicationDetails: Record<string, ApplicationData> = {
     "UAE-2023-78945": {
       name: "Ahmed Mohammed Al-Zahrani",
       arabicName: "أحمد محمد الزهراني",
@@ -479,22 +573,25 @@ function getApplicationData(applicationId: string) {
         riskFlags: [],
       },
     },
-  }
-
-  return applicationDetails[applicationId] || applicationDetails["UAE-2023-78947"]
+  };
+  
+  return applicationDetails[applicationId] || applicationDetails["UAE-2023-78948"];
 }
 
 export function ApplicationReview() {
-  const router = useRouter()
-  const [selectedApplication, setSelectedApplication] = useState<string | null>("UAE-2023-78947")
-  const [sidebarCollapsed, setSidebarCollapsed] = useState(false)
+  const router = useRouter();
+  const [selectedApplication, setSelectedApplication] = useState<string | null>("UAE-2023-78948");
+  console.log(selectedApplication);
+  const [sidebarCollapsed, setSidebarCollapsed] = useState(false);
 
   return (
     <DashboardShell>
       <DashboardHeader />
       <div className="flex flex-1 overflow-hidden">
         {/* Left Sidebar - Application List */}
-        <div className={`border-r transition-all duration-300 ${sidebarCollapsed ? "w-16" : "w-full md:w-80 lg:w-96"}`}>
+        {/* <div
+          className={`border-r transition-all duration-300 ${sidebarCollapsed ? "w-16" : "w-full md:w-80 lg:w-96"}`}
+        >
           <div className="flex flex-col h-full">
             <div className="p-4 border-b">
               <div className="flex items-center justify-between mb-4">
@@ -617,21 +714,137 @@ export function ApplicationReview() {
               {applications.map((application) => (
                 <div
                   key={application.id}
-                  className={`border-b p-4 cursor-pointer hover:bg-slate-50 ${
-                    selectedApplication === application.id ? "bg-blue-50" : ""
-                  }`}
+                  className={`border-b p-4 cursor-pointer hover:bg-slate-50 ${selectedApplication === application.id ? "bg-blue-50" : ""
+                    }`}
                   onClick={() => setSelectedApplication(application.id)}
                 >
                   {sidebarCollapsed ? (
                     <div className="flex flex-col items-center">
-                       <div className="w-8 h-8 rounded-full bg-blue-100 flex items-center justify-center text-xs font-medium">
+                      <div className="w-8 h-8 rounded-full bg-blue-100 flex items-center justify-center text-xs font-medium">
                         {application.name
                           .split(" ")
                           .map((n) => n[0])
                           .join("")
                           .substring(0, 2)}
                       </div>
-                      <StatusBadge status={application.status} /> 
+                      <StatusBadge status={application.status} />
+                    </div>
+                  ) : (
+                    <>
+                      <div className="flex justify-between items-start">
+                        <div>
+                          <div className="font-medium">{application.name}</div>
+                          <div className="text-xs text-muted-foreground">{application.arabicName}</div>
+                        </div>
+                        <StatusBadge status={application.status} />
+                      </div>
+                      <div className="mt-2 flex justify-between items-center">
+                        <div className="text-xs text-muted-foreground">
+                          ID: {application.id} • {application.type}
+                        </div>
+                        <div className="text-xs font-medium">AI: {application.aiConfidence}%</div>
+                      </div>
+                      <div className="mt-1 text-xs text-muted-foreground">Submitted: {application.timestamp}</div>
+                    </>
+                  )}
+                </div>
+              ))}
+            </div>
+          </div>
+        </div> */}
+        <div
+          className={`border-r transition-all duration-300 ${sidebarCollapsed ? "w-12" : "w-80"}`}
+          role="region"
+          aria-label="Application Sidebar"
+        >
+          <div className="flex flex-col h-full">
+            <div className="p-2 border-b flex items-center justify-between">
+              <Button
+                variant="ghost"
+                size="icon"
+                onClick={() => setSidebarCollapsed(!sidebarCollapsed)}
+                className="h-8 w-8"
+                aria-label={sidebarCollapsed ? "Expand sidebar" : "Collapse sidebar"}
+              >
+                {sidebarCollapsed ? <ChevronRight className="h-4 w-4" /> : <ChevronLeft className="h-4 w-4" />}
+              </Button>
+              {!sidebarCollapsed && <h2 className="text-sm font-medium">Applications</h2>}
+            </div>
+
+            {!sidebarCollapsed && (
+              <div className="p-4">
+                <div className="relative mb-4">
+                  <Search className="absolute left-2.5 top-2.5 h-4 w-4 text-muted-foreground" />
+                  <Input
+                    type="search"
+                    placeholder="Search applications..."
+                    className="pl-8"
+                    aria-label="Search applications"
+                  />
+                </div>
+                <div className="flex items-center justify-between">
+                  <h2 className="text-sm font-medium">Filters</h2>
+                  <Popover>
+                    <PopoverTrigger asChild>
+                      <Button variant="outline" size="sm" className="h-8 gap-1" aria-label="Open filter options">
+                        <SlidersHorizontal className="h-3.5 w-3.5" />
+                        <span>Filter</span>
+                      </Button>
+                    </PopoverTrigger>
+                    <PopoverContent className="w-72">
+                      {/* Existing filter content */}
+                    </PopoverContent>
+                  </Popover>
+                </div>
+                <div className="grid grid-cols-2 gap-2 mt-3">
+                  <Select defaultValue="all">
+                    <SelectTrigger className="h-8" aria-label="Filter by status">
+                      <SelectValue placeholder="Status" />
+                    </SelectTrigger>
+                    <SelectContent>
+                      <SelectItem value="all">All Statuses</SelectItem>
+                      <SelectItem value="pending">Pending</SelectItem>
+                      <SelectItem value="flagged">Flagged</SelectItem>
+                      <SelectItem value="approved">Approved</SelectItem>
+                      <SelectItem value="rejected">Rejected</SelectItem>
+                    </SelectContent>
+                  </Select>
+                  <Select defaultValue="all">
+                    <SelectTrigger className="h-8" aria-label="Filter by type">
+                      <SelectValue placeholder="Type" />
+                    </SelectTrigger>
+                    <SelectContent>
+                      <SelectItem value="all">All Types</SelectItem>
+                      <SelectItem value="financial">Financial Aid</SelectItem>
+                      <SelectItem value="housing">Housing Support</SelectItem>
+                      <SelectItem value="healthcare">Healthcare</SelectItem>
+                      <SelectItem value="education">Education</SelectItem>
+                    </SelectContent>
+                  </Select>
+                </div>
+              </div>
+            )}
+            <div className="flex-1 overflow-auto">
+              {applications.map((application) => (
+                <div
+                  key={application.id}
+                  className={`border-b p-2 cursor-pointer hover:bg-slate-50 ${selectedApplication === application.id ? "bg-blue-50" : ""
+                    }`}
+                  onClick={() => setSelectedApplication(application.id)}
+                  role="button"
+                  tabIndex={0}
+                  onKeyDown={(e) => e.key === "Enter" && setSelectedApplication(application.id)}
+                  aria-label={`Select application for ${application.name}`}
+                >
+                  {sidebarCollapsed ? (
+                    <div className="flex flex-col items-center">
+                      <div className="w-8 h-8 rounded-full bg-blue-100 flex items-center justify-center text-xs font-medium">
+                        {application.name
+                          .split(" ")
+                          .map((n) => n[0])
+                          .join("")
+                          .substring(0, 2)}
+                      </div>
                     </div>
                   ) : (
                     <>
@@ -719,15 +932,17 @@ export function ApplicationReview() {
                       <h3 className="font-medium mb-4">Family Composition</h3>
                       <div className="space-y-4">
                         <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-                          {getApplicationData(selectedApplication).familyMembers.map((member, index) => (
-                            <PersonCard
-                              key={index}
-                              name={member.name}
-                              relation={member.relation}
-                              age={member.age}
-                              occupation={member.occupation}
-                            />
-                          ))}
+                          {getApplicationData(selectedApplication).familyMembers.map(
+                            (member: FamilyMember, index: number) => (
+                              <PersonCard
+                                key={index}
+                                name={member.name}
+                                relation={member.relation}
+                                age={member.age}
+                                occupation={member.occupation}
+                              />
+                            )
+                          )}
                         </div>
                       </div>
 
@@ -751,38 +966,43 @@ export function ApplicationReview() {
                             </tr>
                           </thead>
                           <tbody className="divide-y divide-gray-200">
-                            {getApplicationData(selectedApplication).incomeSources.map((source, index) => (
-                              <tr key={index}>
-                                <td className="px-4 py-2 text-sm">{source.source}</td>
-                                <td className="px-4 py-2 text-sm">{source.amount}</td>
-                                <td className="px-4 py-2 text-sm">{source.frequency}</td>
-                                <td className="px-4 py-2 text-sm">
-                                  <span
-                                    className={`inline-flex items-center rounded-full px-2 py-1 text-xs font-medium ${
-                                      source.verified === "Verified"
-                                        ? "bg-green-100 text-green-800"
-                                        : "bg-amber-100 text-amber-800"
-                                    }`}
-                                  >
-                                    {source.verified}
-                                  </span>
-                                </td>
-                              </tr>
-                            ))}
+                            {getApplicationData(selectedApplication).incomeSources.map(
+                              (source: IncomeSource, index: number) => (
+                                <tr key={index}>
+                                  <td className="px-4 py-2 text-sm">{source.source}</td>
+                                  <td className="px-4 py-2 text-sm">{source.amount}</td>
+                                  <td className="px-4 py-2 text-sm">{source.frequency}</td>
+                                  <td className="px-4 py-2 text-sm">
+                                    <span
+                                      className={`inline-flex items-center rounded-full px-2 py-1 text-xs font-medium ${source.verified === "Verified"
+                                          ? "bg-green-100 text-green-800"
+                                          : "bg-amber-100 text-amber-800"
+                                        }`}
+                                    >
+                                      {source.verified}
+                                    </span>
+                                  </td>
+                                </tr>
+                              )
+                            )}
                           </tbody>
                         </table>
                       </div>
 
                       <h3 className="font-medium mt-6 mb-4">Housing Situation</h3>
                       <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                        {Object.entries(getApplicationData(selectedApplication).housing).map(([key, value]) => (
-                          <div key={key}>
-                            <div className="text-sm text-muted-foreground">
-                              {key.replace(/([A-Z])/g, " $1").replace(/^./, (str) => str.toUpperCase())}
+                        {Object.entries(getApplicationData(selectedApplication).housing).map(
+                          ([key, value]: [string, string], index: number) => (
+                            <div key={index}>
+                              <div className="text-sm text-muted-foreground">
+                                {key
+                                  .replace(/([A-Z])/g, " $1")
+                                  .replace(/^./, (str) => str.toUpperCase())}
+                              </div>
+                              <div className="font-medium">{value}</div>
                             </div>
-                            <div className="font-medium">{value}</div>
-                          </div>
-                        ))}
+                          )
+                        )}
                       </div>
                     </TabsContent>
 
@@ -790,47 +1010,51 @@ export function ApplicationReview() {
                     <TabsContent value="ai-analysis" className="p-4 border rounded-md mt-2">
                       <h3 className="font-medium mb-4">Eligibility Assessment</h3>
                       <div className="space-y-4">
-                        {getApplicationData(selectedApplication).aiAnalysis.eligibility.map((item, index) => (
-                          <div key={index} className="space-y-2">
-                            <div className="flex justify-between">
-                              <span className="text-sm">{item.criteria}</span>
-                              <span
-                                className={`text-sm font-medium ${item.status === "Eligible" ? "text-green-600" : "text-amber-600"}`}
-                              >
-                                {item.status}
-                              </span>
+                        {getApplicationData(selectedApplication).aiAnalysis.eligibility.map(
+                          (item: Eligibility, index: number) => (
+                            <div key={index} className="space-y-2">
+                              <div className="flex justify-between">
+                                <span className="text-sm">{item.criteria}</span>
+                                <span
+                                  className={`text-sm font-medium ${item.status === "Eligible" ? "text-green-600" : "text-amber-600"
+                                    }`}
+                                >
+                                  {item.status}
+                                </span>
+                              </div>
+                              <Progress value={item.score} className="h-2" />
+                              <div className="text-xs text-muted-foreground">{item.description}</div>
                             </div>
-                            <Progress value={item.score} className="h-2" />
-                            <div className="text-xs text-muted-foreground">{item.description}</div>
-                          </div>
-                        ))}
+                          )
+                        )}
                       </div>
 
                       <h3 className="font-medium mt-6 mb-4">Risk Assessment</h3>
                       <div className="grid grid-cols-2 gap-4">
-                        {getApplicationData(selectedApplication).aiAnalysis.riskFactors.map((risk, index) => (
-                          <div key={index} className="border rounded-md p-3">
-                            <div className="text-sm font-medium">{risk.factor}</div>
-                            <div className="mt-1 flex items-center">
-                              <div
-                                className={`h-2 w-2 rounded-full mr-2 ${
-                                  risk.level === "Low"
-                                    ? "bg-green-500"
-                                    : risk.level === "Medium"
-                                      ? "bg-amber-500"
-                                      : "bg-red-500"
-                                }`}
-                              ></div>
-                              <span className="text-sm">{risk.level} Risk</span>
+                        {getApplicationData(selectedApplication).aiAnalysis.riskFactors.map(
+                          (risk: RiskFactor, index: number) => (
+                            <div key={index} className="border rounded-md p-3">
+                              <div className="text-sm font-medium">{risk.factor}</div>
+                              <div className="mt-1 flex items-center">
+                                <div
+                                  className={`h-2 w-2 rounded-full mr-2 ${risk.level === "Low"
+                                      ? "bg-green-500"
+                                      : risk.level === "Medium"
+                                        ? "bg-amber-500"
+                                        : "bg-red-500"
+                                    }`}
+                                ></div>
+                                <span className="text-sm">{risk.level} Risk</span>
+                              </div>
                             </div>
-                          </div>
-                        ))}
+                          )
+                        )}
                       </div>
                     </TabsContent>
 
                     <TabsContent value="documents" className="p-4 border rounded-md mt-2">
                       <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                        {getApplicationData(selectedApplication).documents.map((doc, index) => (
+                        {getApplicationData(selectedApplication).documents.map((doc: Document, index: number) => (
                           <DocumentCard key={index} title={doc.title} status={doc.status} confidence={doc.confidence} />
                         ))}
                       </div>
@@ -841,33 +1065,37 @@ export function ApplicationReview() {
                         <div>
                           <h3 className="font-medium mb-3">Application Timeline</h3>
                           <div className="space-y-4">
-                            {getApplicationData(selectedApplication).timeline.map((event, index) => (
-                              <TimelineItem
-                                key={index}
-                                date={event.date}
-                                title={event.title}
-                                description={event.description}
-                                current={event.current}
-                              />
-                            ))}
+                            {getApplicationData(selectedApplication).timeline.map(
+                              (event: TimelineEvent, index: number) => (
+                                <TimelineItem
+                                  key={index}
+                                  date={event.date}
+                                  title={event.title}
+                                  description={event.description}
+                                  current={event.current}
+                                />
+                              )
+                            )}
                           </div>
                         </div>
 
                         <div>
                           <h3 className="font-medium mb-3">Previous Applications</h3>
                           <div className="space-y-3">
-                            {getApplicationData(selectedApplication).previousApplications.map((app, index) => (
-                              <div key={index} className="border rounded-md p-3">
-                                <div className="flex justify-between">
-                                  <div className="font-medium">{app.type}</div>
-                                  <StatusBadge status={app.status} />
+                            {getApplicationData(selectedApplication).previousApplications.map(
+                              (app: PreviousApplication, index: number) => (
+                                <div key={index} className="border rounded-md p-3">
+                                  <div className="flex justify-between">
+                                    <div className="font-medium">{app.type}</div>
+                                    <StatusBadge status={app.status} />
+                                  </div>
+                                  <div className="text-sm text-muted-foreground mt-1">
+                                    {app.date} • ID: {app.id}
+                                  </div>
+                                  <div className="text-sm mt-2">{app.description}</div>
                                 </div>
-                                <div className="text-sm text-muted-foreground mt-1">
-                                  {app.date} • ID: {app.id}
-                                </div>
-                                <div className="text-sm mt-2">{app.description}</div>
-                              </div>
-                            ))}
+                              )
+                            )}
                           </div>
                         </div>
                       </div>
@@ -881,23 +1109,21 @@ export function ApplicationReview() {
                     <CardContent className="p-6">
                       <h3 className="text-lg font-medium mb-4">AI Recommendation</h3>
                       <div
-                        className={`p-3 border rounded-md mb-4 ${
-                          getApplicationData(selectedApplication).aiRecommendation.type === "approve"
+                        className={`p-3 border rounded-md mb-4 ${getApplicationData(selectedApplication).aiRecommendation.type === "approve"
                             ? "bg-green-50 border-green-200"
                             : getApplicationData(selectedApplication).aiRecommendation.type === "review"
                               ? "bg-amber-50 border-amber-200"
                               : "bg-red-50 border-red-200"
-                        }`}
+                          }`}
                       >
                         <div className="flex items-center">
                           <div
-                            className={`font-medium ${
-                              getApplicationData(selectedApplication).aiRecommendation.type === "approve"
+                            className={`font-medium ${getApplicationData(selectedApplication).aiRecommendation.type === "approve"
                                 ? "text-green-800"
                                 : getApplicationData(selectedApplication).aiRecommendation.type === "review"
                                   ? "text-amber-800"
                                   : "text-red-800"
-                            }`}
+                              }`}
                           >
                             {getApplicationData(selectedApplication).aiRecommendation.recommendation}
                           </div>
@@ -907,51 +1133,53 @@ export function ApplicationReview() {
                         </div>
                         <Progress
                           value={getApplicationData(selectedApplication).aiRecommendation.confidence}
-                          className={`h-2 mt-2 ${
-                            getApplicationData(selectedApplication).aiRecommendation.type === "approve"
+                          className={`h-2 mt-2 ${getApplicationData(selectedApplication).aiRecommendation.type === "approve"
                               ? "bg-green-100"
                               : getApplicationData(selectedApplication).aiRecommendation.type === "review"
                                 ? "bg-amber-100"
                                 : "bg-red-100"
-                          }`}
+                            }`}
                         />
                       </div>
 
                       <h4 className="font-medium text-sm mb-2">Key Factors</h4>
                       <ul className="space-y-2 mb-4">
-                        {getApplicationData(selectedApplication).aiRecommendation.keyFactors.map((factor, index) => (
-                          <li key={index} className="flex items-start">
-                            <div
-                              className={`h-5 w-5 rounded-full flex items-center justify-center mr-2 flex-shrink-0 ${
-                                factor.type === "positive"
-                                  ? "bg-green-100 text-green-800"
-                                  : "bg-amber-100 text-amber-800"
-                              }`}
-                            >
-                              {factor.type === "positive" ? "✓" : "!"}
-                            </div>
-                            <span className="text-sm">{factor.text}</span>
-                          </li>
-                        ))}
+                        {getApplicationData(selectedApplication).aiRecommendation.keyFactors.map(
+                          (factor: AIKeyFactor, index: number) => (
+                            <li key={index} className="flex items-start">
+                              <div
+                                className={`h-5 w-5 rounded-full flex items-center justify-center mr-2 flex-shrink-0 ${factor.type === "positive"
+                                    ? "bg-green-100 text-green-800"
+                                    : "bg-amber-100 text-amber-800"
+                                  }`}
+                              >
+                                {factor.type === "positive" ? "✓" : "!"}
+                              </div>
+                              <span className="text-sm">{factor.text}</span>
+                            </li>
+                          )
+                        )}
                       </ul>
 
                       {getApplicationData(selectedApplication).aiRecommendation.riskFlags.length > 0 && (
                         <>
                           <h4 className="font-medium text-sm mb-2">Risk Flags</h4>
                           <div className="space-y-3 mb-4">
-                            {getApplicationData(selectedApplication).aiRecommendation.riskFlags.map((flag, index) => (
-                              <div key={index} className="p-3 border rounded-md">
-                                <div className="flex items-start">
-                                  <div className="h-5 w-5 rounded-full bg-amber-100 flex items-center justify-center text-amber-800 mr-2 flex-shrink-0">
-                                    !
-                                  </div>
-                                  <div>
-                                    <div className="text-sm font-medium">{flag.title}</div>
-                                    <div className="text-xs text-muted-foreground">{flag.description}</div>
+                            {getApplicationData(selectedApplication).aiRecommendation.riskFlags.map(
+                              (flag: RiskFlag, index: number) => (
+                                <div key={index} className="p-3 border rounded-md">
+                                  <div className="flex items-start">
+                                    <div className="h-5 w-5 rounded-full bg-amber-100 flex items-center justify-center text-amber-800 mr-2 flex-shrink-0">
+                                      !
+                                    </div>
+                                    <div>
+                                      <div className="text-sm font-medium">{flag.title}</div>
+                                      <div className="text-xs text-muted-foreground">{flag.description}</div>
+                                    </div>
                                   </div>
                                 </div>
-                              </div>
-                            ))}
+                              )
+                            )}
                           </div>
                         </>
                       )}
@@ -1008,27 +1236,27 @@ export function ApplicationReview() {
         )}
       </div>
     </DashboardShell>
-  )
+  );
 }
 
 function StatusBadge({ status }: { status: string }) {
-  let bgColor = "bg-gray-100 text-gray-800"
+  let bgColor = "bg-gray-100 text-gray-800";
 
   if (status === "Pending") {
-    bgColor = "bg-amber-100 text-amber-800"
+    bgColor = "bg-amber-100 text-amber-800";
   } else if (status === "Approved") {
-    bgColor = "bg-green-100 text-green-800"
+    bgColor = "bg-green-100 text-green-800";
   } else if (status === "Flagged") {
-    bgColor = "bg-red-100 text-red-800"
+    bgColor = "bg-red-100 text-red-800";
   } else if (status === "Auto-Approved") {
-    bgColor = "bg-blue-100 text-blue-800"
+    bgColor = "bg-blue-100 text-blue-800";
   } else if (status === "Needs Review") {
-    bgColor = "bg-amber-100 text-amber-800"
+    bgColor = "bg-amber-100 text-amber-800";
   } else if (status === "Verified") {
-    bgColor = "bg-green-100 text-green-800"
+    bgColor = "bg-green-100 text-green-800";
   }
 
-  return <span className={`rounded-full px-2 py-1 text-xs font-medium ${bgColor}`}>{status}</span>
+  return <span className={`rounded-full px-2 py-1 text-xs font-medium ${bgColor}`}>{status}</span>;
 }
 
 function PersonCard({
@@ -1036,7 +1264,12 @@ function PersonCard({
   relation,
   age,
   occupation,
-}: { name: string; relation: string; age: number; occupation: string }) {
+}: {
+  name: string;
+  relation: string;
+  age: number;
+  occupation: string;
+}) {
   return (
     <div className="border rounded-md p-3">
       <div className="font-medium">{name}</div>
@@ -1046,7 +1279,7 @@ function PersonCard({
         <div>Occupation: {occupation}</div>
       </div>
     </div>
-  )
+  );
 }
 
 function DocumentCard({ title, status, confidence }: { title: string; status: string; confidence: number }) {
@@ -1070,7 +1303,7 @@ function DocumentCard({ title, status, confidence }: { title: string; status: st
         </Button>
       </div>
     </div>
-  )
+  );
 }
 
 function TimelineItem({
@@ -1091,7 +1324,7 @@ function TimelineItem({
         <div className="text-sm text-muted-foreground">{description}</div>
       </div>
     </div>
-  )
+  );
 }
 
 const applications = [
@@ -1127,7 +1360,7 @@ const applications = [
     name: "Aisha Khalid Al-Hashimi",
     arabicName: "عائشة خالد الهاشمي",
     type: "Education Support",
-    status: "Approved",
+    status: "Pending - Urgent",
     aiConfidence: 92,
     timestamp: "May 25, 2023",
   },
@@ -1167,4 +1400,4 @@ const applications = [
     aiConfidence: 88,
     timestamp: "May 23, 2023",
   },
-]
+];

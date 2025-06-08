@@ -420,11 +420,18 @@ function AIInsights() {
 
 const recentApplications = [
   {
+    id: "UAE-2023-78948",
+    name: "Aisha Khalid Al-Hashimi",
+    arabicName: "عائشة خالد الهاشمي",
+    type: "Education Support",
+    status: "Pending - Urgent",
+  },
+  {
     id: "UAE-2023-78945",
     name: "Ahmed Mohammed Al-Zahrani",
     arabicName: "أحمد محمد الزهراني",
     type: "Housing Emergency",
-    status: "Pending - Urgent",
+    status: "Pending",
   },
   {
     id: "UAE-2023-78946",
@@ -438,13 +445,6 @@ const recentApplications = [
     name: "Mohammed Abdullah Al-Mansoori",
     arabicName: "محمد عبدالله المنصوري",
     type: "Healthcare Assistance",
-    status: "Pending",
-  },
-  {
-    id: "UAE-2023-78948",
-    name: "Aisha Khalid Al-Hashimi",
-    arabicName: "عائشة خالد الهاشمي",
-    type: "Education Support",
     status: "Approved",
   },
 ];

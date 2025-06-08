@@ -205,7 +205,7 @@ export function ApplicationDetails({ id }: { id: string }) {
 
                 <Card>
                   <CardContent className="p-6">
-                    <h3 className="text-lg font-medium mb-4">Housing Situation</h3>
+                    <h3 className="text-lg font-bold mb-4">Housing Situation</h3>
                     <div className="space-y-3">
                       <div className="flex justify-between">
                         <span className="text-sm">Housing Type</span>

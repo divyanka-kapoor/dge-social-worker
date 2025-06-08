@@ -39,7 +39,7 @@ export function MainNav({ className }: { className?: string }) {
       >
         Search
       </Link>
-      <Link
+      {/* <Link
         href="/reports"
         className={cn(
           "text-sm font-medium transition-colors hover:text-primary",
@@ -47,15 +47,15 @@ export function MainNav({ className }: { className?: string }) {
         )}
       >
         Reports
-      </Link>
+      </Link> */}
       <Link
-        href="/settings"
+        href="/analytics"
         className={cn(
           "text-sm font-medium transition-colors hover:text-primary",
-          pathname === "/settings" ? "text-primary" : "text-muted-foreground",
+          pathname === "/analytics" ? "text-primary" : "text-muted-foreground",
         )}
       >
-        Settings
+        Analytics
       </Link>
     </nav>
   )
